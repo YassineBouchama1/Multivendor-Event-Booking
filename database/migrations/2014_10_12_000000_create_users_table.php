@@ -18,6 +18,10 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->enum('status', ['active', 'suspended'])->default('active');
+            $table->string('social_id')->nullable();
+            $table->string('social_type')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

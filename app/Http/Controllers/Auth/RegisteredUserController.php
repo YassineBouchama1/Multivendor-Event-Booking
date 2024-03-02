@@ -36,23 +36,23 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
-
-        // if resgisterd as resturant owner
-        // if ($request->has('is_restaurant_owner')) {
-        //     //assign resturant owner role
-        //     $restaurantOwnerRole = Role::findByName('restaurant owner');
-        //     $user->assignRole($restaurantOwnerRole);
-        // }
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
+        // determine role user
+        if ($request->has('is_admin')) {
+            //assign role
+            $restaurantOwnerRole = Role::findByName('');
+            $user->assignRole($restaurantOwnerRole);
+        }
+
+
         event(new Registered($user));
 
-        Auth::login($user);
+        // Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }
