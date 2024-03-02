@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 
 class RegisteredUserController extends Controller
 {
@@ -32,10 +33,17 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+
+        // if resgisterd as resturant owner
+        // if ($request->has('is_restaurant_owner')) {
+        //     //assign resturant owner role
+        //     $restaurantOwnerRole = Role::findByName('restaurant owner');
+        //     $user->assignRole($restaurantOwnerRole);
+        // }
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
