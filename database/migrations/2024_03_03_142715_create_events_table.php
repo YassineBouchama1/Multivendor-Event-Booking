@@ -23,6 +23,7 @@ return new class extends Migration
             $table->dateTime('date');
             $table->decimal('price');
             $table->integer('places');
+            $table->string('city');
             $table->enum('status', ['waiting', 'approved', 'canceled', 'ended'])
                 ->default('waiting');
             $table->enum('reservation_method', ['manual', 'automatic'])->default('automatic');

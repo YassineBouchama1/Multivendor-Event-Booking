@@ -38,6 +38,7 @@ class EventController extends Controller
             'title' => 'required|string|max:255',
             'cover' => 'required|image',
             'description' => 'required|string',
+            'city' => 'required|string',
             // 'location_latitude' => 'required|numeric',
             // 'location_longitude' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',            'date' => 'required|date',
@@ -61,5 +62,69 @@ class EventController extends Controller
         $event = Event::create($validatedData);
 
         return redirect()->route('events.index')->with('success', 'Event created successfully');
+    }
+
+    // Show the form for editing the specified menu
+    public function edit(Event $event)
+    {
+        // Get the authenticated user's restaurant_id
+
+        $id = Auth::user()->id;
+
+        if ($event->organizer_id !== $id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+
+
+        //2- Fetch categories
+        $categories = Category::get();
+
+
+        return view('dashboard.events.edit', compact('event', 'categories'));
+    }
+    // Update the specified event
+    public function update(Request $request, Event $event)
+    {
+        $id = Auth::user()->id;
+
+        // Check if the user is the organizer of the event
+        if ($event->organizer_id !== $id) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        // Validation rules for the request
+        // $rules = [
+        //     'title' => 'required|string|max:255',
+        //     'cover' => 'required|image',
+        //     'description' => 'required|string',
+        //     'city' => 'required|string',
+        //     'category_id' => 'required|exists:categories,id',            'date' => 'required|date',
+        //     'price' => 'required|numeric',
+        //     'places' => 'required|integer',
+        //     'reservation_method' => 'required|in:manual,automatic',
+        // ];
+
+        // // Validate the request data
+        // $validatedData = $request->validate($rules);
+
+        // Update the event with validated data
+        $event->fill($request->all());
+
+        // update image if it passing with request
+        if ($request->hasFile('cover')) {
+            $image = $request->file('cover');
+
+            $imageName = time() . '.' . $image->extension();
+            $image->move(public_path('events'), $imageName);
+            $event->cover = $imageName;
+        }
+
+
+        // Save the updated event
+        $event->save();
+
+        // Redirect with success message
+        return redirect()->route('events.index')->with('success', 'Event updated successfully.');
     }
 }

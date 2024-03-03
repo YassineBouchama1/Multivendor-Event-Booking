@@ -17,7 +17,7 @@
 
 {{-- //passing title of this page --}}
 @section('title')
-Create Event
+Update Event
 @endsection
 
 
@@ -25,14 +25,16 @@ Create Event
 
 
 
-<form  method="POST"  action="{{route('events.store')}}" enctype="multipart/form-data"
+<form  method="POST"  action="{{route('events.update',['event'=>$event['id']])}}"
+enctype="multipart/form-data"
    class="h-auto w-full p-4 flex flex-col md:flex-row justify-between gap-4 ">
     @csrf()
+    @method('PUT')
     <div class="rounded-md w-full p-4 bg-white transition-shadow box-border color-opacity-87   shadow-md backdrop-blur-md">
 <label for="Title"
 class="flex flex-col gap-y-1 mt-8">
      Title
-    <input  type="text" id="title" name="title" value="{{@old('title')}}"
+    <input  type="text" id="title" name="title" value="{{$event['title']}}"
 class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
     placeholder="Enter title">
 </label>
@@ -41,14 +43,14 @@ class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
 <label for="price"
 class="flex flex-col gap-y-1 mt-8">
 price
-    <input  type="number" id="price" name="price"  value="{{@old('price')}}"
+    <input  type="number" id="price" name="price"  value="{{$event['price']}}"
 class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
     placeholder="Enter price">
 </label>
 <label for="places"
 class="flex flex-col gap-y-1 mt-8">
 Places Number
-    <input  type="number" id="places" name="places"  value="{{@old('places')}}"
+    <input  type="number" id="places" name="places"  value="{{$event['places']}}"
 class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
     placeholder="Enter places">
 </label>
@@ -56,14 +58,14 @@ class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
 <label for="city"
 class="flex flex-col gap-y-1 mt-8">
 city
-    <input  type="text" id="city" name="city"  value="{{@old('city')}}"
+    <input  type="text" id="city" name="city"  value="{{$event['city']}}"
 class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
     placeholder="Enter city">
 </label>
 <label for="places"
 class="flex flex-col gap-y-1 mt-8">
 date
-    <input  type="datetime-local" id="date" name="date"  value="{{@old('date')}}"
+    <input  type="datetime-local" id="date" name="date"  value="{{$event['date']}}"
 class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
     placeholder="Enter date">
 </label>
@@ -73,34 +75,26 @@ class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
     class="flex flex-col gap-y-1 mt-8">
     Accepte Reservation Method
 
-      <select
-      class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
-      name="reservation_method"
-      value="{{@old('reservation_method')}}"
-      >
-      <option disabled selected value="">Select Method</option>
-      <option value="manual">manual</option>
-        <option value="automatic">automatic</option>
-      </select>
+    <select class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600" name="reservation_method">
+        <option value="manual" {{ $event->reservation_method == 'manual' ? 'selected' : '' }}>Manual</option>
+        <option value="automatic" {{ $event->reservation_method == 'automatic' ? 'selected' : '' }}>Automatic</option>
+    </select>
+
 
     </label>
 
     <label for="category_id"
     class="flex flex-col gap-y-1 mt-8">
     Categories
-    <select
-    class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
-id="category_id"
-
-    name="category_id">
-        <option disabled selected value="">Select Category</option>
-
-        @forelse ($categories as $cetgory)
-        <option value="{{$cetgory['id']}}">{{$cetgory['name']}}</option>
-        @empty
-        <option value="">Empty</option>
-        @endforelse
+    <select class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600" id="category_id" name="category_id">
+        <option disabled>Select Category</option>
+        @foreach ($categories as $category)
+            <option value="{{ $category->id }}" {{ $event->category_id == $category->id ? 'selected' : '' }}>
+                {{ $category->name }}
+            </option>
+        @endforeach
     </select>
+
     </label>
 
 </div>
@@ -111,7 +105,7 @@ class="flex flex-col gap-y-1 mt-8">
 description
     <textarea rows="4"  type="text" id="description" name="description"
 class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
-    placeholder="Enter description">  {{@old('description')}}</textarea>
+    placeholder="Enter description">  {{$event['description']}}</textarea>
 </label>
 
 
@@ -129,8 +123,9 @@ class="flex flex-col lg:flex-row gap-y-1 mt-8 ">
 
     <div class=" basis-1/3 	flex  flex-col gap-6">
 
-<div class="p-4  bg-white rounded-sm transition-shadow box-border color-opacity-87   shadow-md backdrop-blur-md">
-    <input name="cover" type="file">
+<div class="p-4 flex items-center flex-col bg-white rounded-sm transition-shadow box-border color-opacity-87   shadow-md backdrop-blur-md">
+    <input name="cover" type="file" value="{{$event['cover']}}">
+    <img class="h-32 w-auto rounded-full" src="{{ asset('events').'/'.$event['cover'] }}"  alt=" avatar">
 
 
 

@@ -13,6 +13,7 @@ class Event extends Model
         'title',
         'cover',
         'price',
+        'city',
         'description',
         'location_latitude',
         'location_longitude',

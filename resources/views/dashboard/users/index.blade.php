@@ -89,7 +89,7 @@ Events
                                             <option value="active" selected={{$user['status'] == 'active'}}>active</option>
                                             <option value="suspended"  selected={{$user['status'] == 'suspended'}}>suspended</option>
                                         </select>
-                                                                    </div>
+</div>
                                 </td>
                                 <td class="p-4 whitespace-nowrap space-x-2">
 
