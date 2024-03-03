@@ -17,8 +17,10 @@ class EventController extends Controller
 
 
 
-        return view('dashboard.events.index', compact('events', 'categories'));
+        return view('dashboard.events.index', compact('events'));
     }
+
+
 
     public function create()
     {
@@ -26,12 +28,15 @@ class EventController extends Controller
         return view('dashboard.events.create', compact('categories'));
     }
 
+
+
+
     public function store(Request $request)
     {
         // Validate  request data
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            // 'cover' => 'required|string',
+            'cover' => 'required|image',
             'description' => 'required|string',
             // 'location_latitude' => 'required|numeric',
             // 'location_longitude' => 'required|numeric',
@@ -41,11 +46,16 @@ class EventController extends Controller
             'reservation_method' => 'required|in:manual,automatic',
         ]);
 
+        $image = $request->file('cover');
+
+        $imageName = time() . '.' . $image->extension();
+        $image->move(public_path('events'), $imageName);
+
         //get organizer_id
         $validatedData['organizer_id'] = Auth::id();
         $validatedData['location_latitude'] = 32.288281907159664;
         $validatedData['location_longitude'] = -9.22502082808233;
-        $validatedData['cover'] = "image";
+        $validatedData['cover'] = $imageName;
 
         // Create a new event
         $event = Event::create($validatedData);
