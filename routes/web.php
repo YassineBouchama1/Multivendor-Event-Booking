@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Dashboard\Admin\CategoriesController;
-use App\Http\Controllers\Dashboard\Admin\UsersController;
-use App\Http\Controllers\Dashboard\DashboardController;
-use App\Http\Controllers\Dashboard\Organizer\EventController;
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\Organizer\EventController;
+use App\Http\Controllers\Organizer\OrganizerDashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,19 +27,29 @@ Route::get('/', function () {
 
 
 
-//routes for admin and oranied
-Route::middleware(['auth', 'verified', 'checkrole:admin|organizer'])->prefix('/dashboard')->group(function () {
+//routes for admin
+Route::middleware(['auth', 'verified', 'checkrole:admin'])->prefix('/admin')->group(function () {
 
-    Route::resource('/', DashboardController::class)->except(['show']);
+    Route::resource('/', AdminDashboardController::class)->except(['show']);
     Route::resource('/categories', CategoriesController::class)->except(['show']);
     Route::resource('/users', UsersController::class)->except(['show']);
+    Route::patch('/events', [EventController::class, 'accept']);
+});
+
+//routes for  oranied
+Route::middleware(['auth', 'verified', 'checkrole:organizer'])->prefix('/organizer')->group(function () {
+
+    Route::resource('/', OrganizerDashboardController::class)->except(['show']);
+
     Route::resource('/events', EventController::class)->except(['show']);
 });
+
+
 
 //routes for users
 Route::middleware(['auth', 'verified', 'checkrole:user'])->prefix('/user')->group(function () {
 
-    Route::resource('/', DashboardController::class)->except(['show']);
+    // Route::resource('/', DashboardController::class)->except(['show']);
 });
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard\Admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -21,7 +21,7 @@ class CategoriesController extends Controller
             return   Category::get();
         });
 
-        return view('dashboard.categories.index', compact('categories'));
+        return view('admin.categories.index', compact('categories'));
     }
 
 

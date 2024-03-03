@@ -1,4 +1,5 @@
-@extends('dashboard.layouts.dashboard_layout')
+@extends('organizer.layouts.dashboard_layout')
+
 @section('content')
 {{-- display msg errors --}}
 

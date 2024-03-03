@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard\Organizer;
+namespace App\Http\Controllers\Organizer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -17,7 +17,7 @@ class EventController extends Controller
 
 
 
-        return view('dashboard.events.index', compact('events'));
+        return view('organizer.events.index', compact('events'));
     }
 
 
@@ -25,7 +25,7 @@ class EventController extends Controller
     public function create()
     {
         $categories = Category::get();
-        return view('dashboard.events.create', compact('categories'));
+        return view('organizer.events.create', compact('categories'));
     }
 
 
@@ -81,7 +81,7 @@ class EventController extends Controller
         $categories = Category::get();
 
 
-        return view('dashboard.events.edit', compact('event', 'categories'));
+        return view('organizer.events.edit', compact('event', 'categories'));
     }
     // Update the specified event
     public function update(Request $request, Event $event)
@@ -93,20 +93,7 @@ class EventController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        // Validation rules for the request
-        // $rules = [
-        //     'title' => 'required|string|max:255',
-        //     'cover' => 'required|image',
-        //     'description' => 'required|string',
-        //     'city' => 'required|string',
-        //     'category_id' => 'required|exists:categories,id',            'date' => 'required|date',
-        //     'price' => 'required|numeric',
-        //     'places' => 'required|integer',
-        //     'reservation_method' => 'required|in:manual,automatic',
-        // ];
 
-        // // Validate the request data
-        // $validatedData = $request->validate($rules);
 
         // Update the event with validated data
         $event->fill($request->all());
@@ -126,5 +113,28 @@ class EventController extends Controller
 
         // Redirect with success message
         return redirect()->route('events.index')->with('success', 'Event updated successfully.');
+    }
+
+    public function destroy(Event $event)
+    {
+
+
+        $event->delete();
+        return redirect()->route('events.index')->with('success', 'Event Deleted successfully.');
+    }
+
+
+    //this is for admin only
+
+
+    public function accept(Request $request, Event $event)
+    {
+
+        // validate if user is admin
+        $event->status = $request->status;
+
+        $event->save();
+
+        return redirect()->route('admin.index')->with('success', 'Event Accepted successfully.');;
     }
 }

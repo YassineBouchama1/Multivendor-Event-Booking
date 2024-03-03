@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard\Admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
@@ -22,7 +22,7 @@ class UsersController extends Controller
             })->get();
         });
         // dd($users);
-        return view('dashboard.users.index', compact('users'));
+        return view('admin.users.index', compact('users'));
     }
 
     public function update(User $user, Request $request)

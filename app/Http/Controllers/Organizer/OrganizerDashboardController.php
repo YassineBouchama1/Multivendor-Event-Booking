@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Organizer;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class OrganizerDashboardController extends Controller
 
 {
 
@@ -13,6 +13,6 @@ class DashboardController extends Controller
     {
 
         // dd('dahsboar');
-        return view('dashboard.index');
+        return view('organizer.index');
     }
 }

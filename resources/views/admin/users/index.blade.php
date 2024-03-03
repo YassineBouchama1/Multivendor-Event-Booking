@@ -1,4 +1,5 @@
-@extends('dashboard.layouts.dashboard_layout')
+@extends('admin.layouts.dashboard_layout')
+
 
 @section('content')
 {{-- display msg errors --}}
@@ -81,7 +82,7 @@ Events
                                         <div class="text-sm font-normal text-gray-500">{{$user['email']}}</div>
                                     </div>
                                 </td>
-                                <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">noraml user</td>
+                                <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{$user->hasRole('user')?'user':'organizer'}}</td>
                                 <td class="p-4 whitespace-nowrap text-base font-normal text-gray-900">
                                     <div class="flex items-center">
 

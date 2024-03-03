@@ -27,13 +27,13 @@
     </style>
     <body class=" flex  flex-row w-full  bg-[#F5F6FA]  text-base font-normal leading-5 font-sans">
 
-            @include('dashboard/layouts.sideBar')
+            @include('organizer/layouts.sideBar')
              <!--  inside page  -->
   <div  class=" flex-grow min-h-screen  relative px-4 ">
 
 
     <!-- Header Start -->
-            @include('dashboard/layouts.header')
+            @include('organizer/layouts.header')
 
                <!-- Header StaEndrt -->
                <!--  start page content  -->
