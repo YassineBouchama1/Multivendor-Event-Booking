@@ -29,6 +29,14 @@
 
         </a>
       </li>
+      <li id="mainlink" class=" mt-1 cursor-pointer 	text-black duration-300   no-underline   whitespace-nowrap   text-lg p-2 sm:p-3 sm:pl-6 rounded-tr-md rounded-br-md font-normal leading-6">
+        <a href="./" class="">
+          <i class="ti ti-home h-[24px] w-[24px]  "></i>
+          <span>Event</span>
+
+        </a>
+      </li>
+
 
     </ul>
 
@@ -37,66 +45,5 @@
   </aside>
 
 
-<script>
-
-window.location.pathname;
-
-document.addEventListener('DOMContentLoaded', function () {
 
 
-    let currentPath = window.location.pathname;
-
-    // Find the corresponding link in the sidebar and add the "active" class
-    let sidebarLinks = document.querySelectorAll("#sidebar_dash a");
-    let mainlink = document.getElementById("mainlink");
-
-
-    let toggleSideBar = document.getElementById('toggleSideBarinside');
-    let sidebar_dash = document.getElementById('sidebar_dash');
-
-    toggleSideBar.addEventListener('click', onToggle);
-
-    function onToggle() {
-        if (sidebar_dash.classList.contains('left-[-100%]')) {
-            sidebar_dash.classList.remove('left-[-100%]');
-            sidebar_dash.classList.add('left-5');
-        } else {
-            sidebar_dash.classList.remove('left-5');
-            sidebar_dash.classList.add('left-[-100%]');
-        }
-    }
-
-
-
-
-    //
-    // sidebarLinks.forEach(function (link) {
-    //     let href = link.getAttribute("href");
-
-
-
-    //     // if href empty or contain index that mean
-    //     //add active link to dashboard li
-    //     if (href.slice(2) === '' || href.slice(2).includes('index')) {
-    //         mainlink.classList.add( "text-gray-500");
-
-    //     }
-
-    //     //  //add active link to  similar text
-    //     else if (currentPath.includes(href.slice(2))) {
-
-    //         link.parentNode.classList.add( "text-[#0085DB]");
-    //         mainlink.classList.remove( "text-[#0085DB]");
-    //     }
-    // });
-
-
-
-});
-
-
-
-
-</script>
-
-  <!--- toggle sidebar script >

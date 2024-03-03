@@ -29,7 +29,7 @@
 
             @include('dashboard/layouts.sideBar')
              <!--  inside page  -->
-  <div class=" flex-grow min-h-[100%] py-20 relative px-4 lg:pr-8 lg:pl-3 ">
+  <div  class=" flex-grow min-h-[100%]  relative px-4 ">
 
 
     <!-- Header Start -->
@@ -38,7 +38,7 @@
                <!-- Header StaEndrt -->
 
                 <!--  start page content  -->
-                <main class="  top-14 fixed h-screen pt-10   px-4 lg:px-8 lg:pl-3 left-0 lg:left-72 right-0   transition-all duration-300 ease-in-out ">
+                <main id="mainSide" class="  top-14 fixed h-screen pt-10   px-4   lg:px-8 left-0 lg:left-60 right-0   transition-all duration-300 ease-in-out ">
                     @yield('content')
                 </main>
 
@@ -47,5 +47,43 @@
 
         </div>
 
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        let logoutDashboard = document.getElementById('logoutDashboard')
+        let toggleSideBar = document.getElementById('toggleSideBar');
+        let sidebar_dash = document.getElementById('sidebar_dash');
+        let mainSideHeader = document.getElementById('mainSideHeader');
+        let mainSide = document.getElementById('mainSide');
+
+
+        toggleSideBar.addEventListener('click', onToggle);
+
+
+
+
+        function onToggle() {
+            if (sidebar_dash.classList.contains('left-[-100%]')) {
+                sidebar_dash.classList.remove('left-[-100%]');
+                mainSide.classList.remove('lg:left-100')
+                mainSide.classList.add('lg:left-60')
+                mainSideHeader.classList.remove('lg:left-100')
+                mainSideHeader.classList.add('lg:left-60')
+                sidebar_dash.classList.add('left-0');
+            } else {
+                mainSideHeader.classList.remove('lg:left-60')
+                mainSideHeader.classList.add('lg:left-100')
+                mainSide.classList.remove('lg:left-60')
+                mainSide.classList.add('lg:left-100')
+                sidebar_dash.classList.remove('left-0');
+                sidebar_dash.classList.add('left-[-100%]');
+            }
+        }
+
+
+
+
+    });
+</script>
     </body>
 </html>

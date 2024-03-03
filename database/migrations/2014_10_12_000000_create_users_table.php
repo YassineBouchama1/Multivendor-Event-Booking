@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('status', ['active', 'suspended'])->default('active');
             $table->string('social_id')->nullable();
             $table->string('social_type')->nullable();
+            $table->string('address');
             $table->softDeletes();
             $table->timestamps();
         });

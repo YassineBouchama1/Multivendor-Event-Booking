@@ -31,22 +31,25 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        // dd($request->address);
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'address' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'address' => $request->address,
             'password' => Hash::make($request->password),
         ]);
 
         // determine role user
         if ($request->has('is_admin')) {
             //assign role
-            $restaurantOwnerRole = Role::findByName('');
-            $user->assignRole($restaurantOwnerRole);
+            $userRole = Role::findByName('admin');
+            $user->assignRole($userRole);
         }
 
 
@@ -54,6 +57,6 @@ class RegisteredUserController extends Controller
 
         // Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::LOGIN);
     }
 }

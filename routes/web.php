@@ -19,9 +19,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
+
+
+
+
+//routes for admin and oranied
+Route::middleware(['auth', 'verified', 'checkrole:admin|organizer'])->prefix('/dashboard')->group(function () {
+
+    Route::resource('/', DashboardController::class)->except(['show']);
+});
+
+//routes for users
+Route::middleware(['auth', 'verified', 'checkrole:user'])->prefix('/user')->group(function () {
+
+    Route::resource('/', DashboardController::class)->except(['show']);
+});
+
 
 
 Route::middleware('auth')->group(function () {
@@ -31,20 +44,9 @@ Route::middleware('auth')->group(function () {
 });
 
 
+//this route for not authrized users
+Route::get('not_authorized', fn () => view('not_authorized'))->name('not_authorized');
 
-
-//dahsboard for admin and oranied
-Route::prefix('/dashboard')->group(function () {
-
-    Route::resource('/', DashboardController::class)->except(['show']);
-});
-
-// ::middleware(['auth', 'verified', 'checkrole:restaurant owner|operator'])->
-Route::prefix('/user')->group(function () {
-
-    Route::resource('/', DashboardController::class)->except(['show']);
-});
-
-
+Route::fallback(fn () => 'error  4040');
 
 require __DIR__ . '/auth.php';

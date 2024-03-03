@@ -26,14 +26,7 @@ class CheckRoleMiddleware
             }
         }
 
-
-
-        if (Auth::user()->hasRole('admin')) {
-
-            return redirect()->route('not.authorized');
-        } elseif (Auth::user()->hasRole('restaurant owner') || Auth::user()->hasRole('operator')) {
-            return redirect()->route('not.authorized');
-        }
-        return $next($request);
+        // 2- if not of passing roles are found , redirect to nt  auth page
+        return redirect()->route('not_authorized');
     }
 }
