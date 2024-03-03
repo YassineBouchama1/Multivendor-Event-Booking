@@ -36,8 +36,8 @@
 
     <img src="" class="w-8 h-8 rounded-full bg-[black]"></div>
     <div class="">
-        <p class="font-semibold text-xs ">Yassine</p>
-        <p class="font-light text-xs ">Admin</p></div>
+        <p class="font-semibold text-xs ">{{ Auth::user()->name }}</p>
+        <p class="font-light text-xs ">{{ Auth::user()->hasRole('admin') ?  'admin':'organized' }}</p></div>
 </div>
 </header>
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,7 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified', 'checkrole:admin|organizer'])->prefix('/dashboard')->group(function () {
 
     Route::resource('/', DashboardController::class)->except(['show']);
+    Route::resource('/categories', CategoriesController::class)->except(['show']);
 });
 
 //routes for users

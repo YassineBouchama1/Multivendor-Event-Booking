@@ -17,6 +17,7 @@ export default {
             },
             colors: {
                 mainColorDashboard: '#4880FF',
+                // bg-[#4880FF]
                 hoverColorDashboard: '#d9e3f8',
                 textColorDashboard: "#181c22"
             }
