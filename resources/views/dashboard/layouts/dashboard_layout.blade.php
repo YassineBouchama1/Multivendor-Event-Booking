@@ -29,16 +29,16 @@
 
             @include('dashboard/layouts.sideBar')
              <!--  inside page  -->
-  <div  class=" flex-grow min-h-[100%]  relative px-4 ">
+  <div  class=" flex-grow min-h-screen  relative px-4 ">
 
 
     <!-- Header Start -->
             @include('dashboard/layouts.header')
 
                <!-- Header StaEndrt -->
-
-                <!--  start page content  -->
-                <main id="mainSide" class="  top-14 fixed h-screen pt-10   px-4   lg:px-8 left-0 lg:left-60 right-0   transition-all duration-300 ease-in-out ">
+               <!--  start page content  -->
+               <main id="mainSide" class="  top-14  absolute h-full pt-10   px-4   lg:px-8 left-0 lg:left-60 right-0   transition-all duration-300 ease-in-out ">
+                    <h2 class="text-3xl font-bold pb-4"> @yield('title')</h2>
                     @yield('content')
                 </main>
 

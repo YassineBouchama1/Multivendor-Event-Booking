@@ -14,13 +14,18 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('cover');
             $table->longText('description');
             $table->decimal('location_latitude', 10, 8);;
             $table->decimal('location_longitude', 11, 8);
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('organizer_id')->constrained('users');
             $table->dateTime('date');
+            $table->decimal('price');
             $table->integer('places');
+            $table->enum('status', ['waiting', 'approved', 'canceled', 'ended'])
+                ->default('waiting');
+            $table->enum('reservation_method', ['manual', 'automatic'])->default('automatic');
             $table->softDeletes();
             $table->timestamps();
         });

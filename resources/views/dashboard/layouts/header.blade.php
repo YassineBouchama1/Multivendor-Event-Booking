@@ -1,4 +1,4 @@
-<header id="mainSideHeader" class="bg-white [&.show]:translate-y-0 top-0 fixed h-16 px-4 md:px-8 lg:pl-3 left-0 lg:left-60 right-0 flex items-center justify-between gap-3  transition-all duration-300 ease-in-out  ">
+<header id="mainSideHeader" class="z-50 bg-white [&.show]:translate-y-0 top-0 fixed h-16 px-4 md:px-8 lg:pl-3 left-0 lg:left-60 right-0 flex items-center justify-between gap-3  transition-all duration-300 ease-in-out  ">
 
 
     {{-- <button id="toggleSideBar" class="text-white"><i class="lg:hidden  flex ti ti-menu-2 text-xl cursor-pointer  "> </i></button> --}}

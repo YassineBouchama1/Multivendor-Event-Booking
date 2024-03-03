@@ -22,6 +22,13 @@
   </div>
 @endif
 
+
+
+{{-- //passing title of this page --}}
+@section('title')
+Events
+@endsection
+
 <main class="flex gap-6 flex-col md:flex-row">
 
 

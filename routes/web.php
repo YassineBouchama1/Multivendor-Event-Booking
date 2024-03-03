@@ -3,6 +3,7 @@
 use App\Http\Controllers\Dashboard\Admin\CategoriesController;
 use App\Http\Controllers\Dashboard\Admin\UsersController;
 use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\Organizer\EventController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,7 @@ Route::middleware(['auth', 'verified', 'checkrole:admin|organizer'])->prefix('/d
     Route::resource('/', DashboardController::class)->except(['show']);
     Route::resource('/categories', CategoriesController::class)->except(['show']);
     Route::resource('/users', UsersController::class)->except(['show']);
+    Route::resource('/events', EventController::class)->except(['show']);
 });
 
 //routes for users

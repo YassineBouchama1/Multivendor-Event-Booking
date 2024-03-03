@@ -19,6 +19,8 @@ class Event extends Model
         'organizer_id',
         'date',
         'places',
+        'status',
+        'reservation_method'
 
     ];
 
