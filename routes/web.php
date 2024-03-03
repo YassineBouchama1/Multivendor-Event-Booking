@@ -33,7 +33,7 @@ Route::middleware(['auth', 'verified', 'checkrole:admin'])->prefix('/admin')->gr
     Route::resource('/', AdminDashboardController::class)->except(['show']);
     Route::resource('/categories', CategoriesController::class)->except(['show']);
     Route::resource('/users', UsersController::class)->except(['show']);
-    Route::patch('/events', [EventController::class, 'accept']);
+    Route::patch('/events/{event}', [EventController::class, 'accept'])->name('events.accept');
 });
 
 //routes for  oranied

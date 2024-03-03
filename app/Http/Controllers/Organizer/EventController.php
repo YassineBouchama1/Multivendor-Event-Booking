@@ -127,14 +127,14 @@ class EventController extends Controller
     //this is for admin only
 
 
-    public function accept(Request $request, Event $event)
+    public function accept(Event $event)
     {
 
         // validate if user is admin
-        $event->status = $request->status;
+        $event->status = 'approved';
 
         $event->save();
 
-        return redirect()->route('admin.index')->with('success', 'Event Accepted successfully.');;
+        return redirect('/admin')->with('success', 'Event Accepted successfully.');;
     }
 }
