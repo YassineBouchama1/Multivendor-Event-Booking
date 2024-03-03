@@ -25,6 +25,7 @@ class User extends Authenticatable
         'address',
         'password',
         'social_id',
+        'status',
         'social_type'
     ];
 
@@ -47,4 +48,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }

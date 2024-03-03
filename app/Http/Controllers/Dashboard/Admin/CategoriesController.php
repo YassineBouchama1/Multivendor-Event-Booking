@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Dashboard\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -28,10 +28,11 @@ class CategoriesController extends Controller
     // Store a newly created Category in storage
     public function store(Request $request)
     {
+        // dd($request->name);
         $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
+            'name' => ['required', 'string', 'max:255', 'unique:' . Category::class],
 
+        ]);
 
         //create category
         $menu = new Category();

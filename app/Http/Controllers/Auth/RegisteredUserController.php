@@ -51,7 +51,11 @@ class RegisteredUserController extends Controller
             $userRole = Role::findByName('admin');
             $user->assignRole($userRole);
         }
-
+        if ($request->has('is_user')) {
+            //assign role
+            $userRole = Role::findByName('user');
+            $user->assignRole($userRole);
+        }
 
         event(new Registered($user));
 

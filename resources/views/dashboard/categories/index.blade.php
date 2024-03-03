@@ -58,18 +58,16 @@
 
     <div class="w-full overflow-x-auto p-4 flex flex-col basis-4/3 bg-white rounded-sm transition-shadow box-border color-opacity-87   shadow-md backdrop-blur-md">
 
-        <table class="w-full whitespace-no-wrap">
-            <thead>
-                <tr
-          class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
-        >
-          <th class="px-4 py-3">Name</th>
+        <table class="w-full whitespace-no-wrap  table-fixed min-w-auto divide-y divide-gray-200">
+            <thead class="">
+                <tr  >
+          <th class="p-4 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
 
-          <th class="px-4 py-3">Action</th>
+          <th class="p-4 text-left text-xs font-medium text-gray-500 uppercase">Action</th>
         </tr>
     </thead>
     <tbody
-    class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+    class="bg-white divide-y divide-gray-200 "
     >
     @forelse ($categories as $item)
       <tr class="text-gray-700 dark:text-gray-400">
@@ -90,6 +88,8 @@
             @csrf()
             @method('delete')
             <button type="submit" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                <svg class="mr-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+
                 Delete
             </button>
         </form>
