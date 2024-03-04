@@ -20,7 +20,7 @@
     <body class=" flex  flex-col w-full  h-full bg-[#F5F6FA]  text-base font-normal leading-5 font-sans">
 
     <!-- Header Start -->
-            @include('guest/components.header')
+
 
             @yield('content')
 

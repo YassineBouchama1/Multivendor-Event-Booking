@@ -58,19 +58,25 @@ Route::middleware(['auth', 'verified', 'checkrole:user'])->prefix('/user')->grou
 });
 
 
-//routes for guest
+
+
+// Routes for guests
 Route::prefix('/')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+    Route::middleware('guest')->group(function () {
+        Route::get('registerUser', [HomeController::class, 'registerUser']);
+    });
 });
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-
-
 
 //this route for not authrized users
 Route::get('not_authorized', fn () => view('not_authorized'))->name('not_authorized');

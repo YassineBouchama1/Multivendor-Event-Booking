@@ -10,4 +10,9 @@ class HomeController extends Controller
     {
         return view('guest.home');
     }
+
+    public function registerUser()
+    {
+        return view('guest.registerUser');
+    }
 }
