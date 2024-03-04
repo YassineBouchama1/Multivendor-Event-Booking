@@ -9,17 +9,27 @@
       class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed"
       style="background-color: rgba(0, 0, 0, 0.75)">
       <div class="flex h-full items-center justify-center">
-        <div class="px-6 text-center text-white md:px-12">
-          <h1 class="mb-6 text-5xl font-bold">Heading</h1>
-          <h3 class="mb-8 text-3xl font-bold">Subeading</h3>
-          <button
-            type="button"
-            class="inline-block rounded border-2 border-neutral-50 px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-100 focus:border-neutral-100 focus:text-neutral-100 focus:outline-none focus:ring-0 active:border-neutral-200 active:text-neutral-200 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
-            data-te-ripple-init
-            data-te-ripple-color="light">
-            Get started
-          </button>
+        <form class=" text-center flex justify-between items-center w-2/4 h-14 rounded-sm bg-white">
+          <div class="border-r-2">
+
+    <select  class="border-none outline-none ocus:ring-white focus:border-white hover:cursor-pointer">
+      <option selected value="" disabled>All categories</option>
+      <option value="US">United States</option>
+      <option value="CA">Canada</option>
+      <option value="FR">France</option>
+      <option value="DE">Germany</option>
+    </select>
+
+
+          </div>
+
+          {{-- searhc input --}}
+          <div class="border-r-2 w-full flex flext-start items-center">
+            <i class="fa-solid fa-magnifying-glass text-xl px-3"></i>
+            <input type="text" class="w-full bg-white rounded-lg focus:outline-white border-white focus:border-white	 hover:cursor-pointer" name="">
         </div>
+          <button class="w-1/4 bg-mainColorDashboard text-white h-full self-end">Find Event</button>
+        </form>
       </div>
     </div>
   </div>

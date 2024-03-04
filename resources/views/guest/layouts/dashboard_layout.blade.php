@@ -17,11 +17,11 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
 
-    <body class=" flex  flex-col w-full  h-full bg-[#F5F6FA]  text-base font-normal leading-5 font-sans">
+    <body class=" flex  flex-col w-full  h-full bg-backgroundHome  text-base font-normal leading-5 font-sans">
 
     <!-- Header Start -->
 
-
+    @include('guest/components.header')
             @yield('content')
 
     </body>

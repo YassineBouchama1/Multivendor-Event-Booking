@@ -1,15 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
-@import '~@fortawesome/fontawesome-free/scss/solid';
-@import '~@fortawesome/fontawesome-free/scss/regular';
 
-
-
-*{
-
-}
 /* body::-webkit-scrollbar {
     width: 1em;
 }
@@ -22,3 +14,4 @@ body::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
 } */
+
