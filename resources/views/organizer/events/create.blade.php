@@ -33,7 +33,7 @@ Create Event
 class="flex flex-col gap-y-1 mt-8">
      Title
     <input  type="text" id="title" name="title" value="{{@old('title')}}"
-class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
+class="w-full rounded-lg border-gray-200 p-3 text-sm"
     placeholder="Enter title">
 </label>
 
@@ -42,14 +42,14 @@ class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
 class="flex flex-col gap-y-1 mt-8">
 price
     <input  type="number" id="price" name="price"  value="{{@old('price')}}"
-class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
+class="w-full rounded-lg border-gray-200 p-3 text-sm"
     placeholder="Enter price">
 </label>
 <label for="places"
 class="flex flex-col gap-y-1 mt-8">
 Places Number
     <input  type="number" id="places" name="places"  value="{{@old('places')}}"
-class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
+class="w-full rounded-lg border-gray-200 p-3 text-sm"
     placeholder="Enter places">
 </label>
 
@@ -57,31 +57,53 @@ class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
 class="flex flex-col gap-y-1 mt-8">
 city
     <input  type="text" id="city" name="city"  value="{{@old('city')}}"
-class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
+class="w-full rounded-lg border-gray-200 p-3 text-sm"
     placeholder="Enter city">
 </label>
 <label for="places"
 class="flex flex-col gap-y-1 mt-8">
 date
     <input  type="datetime-local" id="date" name="date"  value="{{@old('date')}}"
-class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
+class="w-full rounded-lg border-gray-200 p-3 text-sm"
     placeholder="Enter date">
 </label>
+
+
+{{-- selector method accept? --}}
 
 <div class="flex justify-start flex-col md:flex-row md:items-center items-start gap-x-4">
     <label for="reservation_method"
     class="flex flex-col gap-y-1 mt-8">
     Accepte Reservation Method
+    <div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
+        <div>
+          <label
+            for="Option1"
+            class="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
+            tabindex="0"
+          >
+            <input value="automatic" class="sr-only" id="Option1" type="radio" tabindex="-1" name="reservation_method" />
 
-      <select
-      class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
-      name="reservation_method"
-      value="{{@old('reservation_method')}}"
-      >
-      <option disabled selected value="">Select Method</option>
-      <option value="manual">manual</option>
-        <option value="automatic">automatic</option>
-      </select>
+            <span class="text-sm">automatic</span>
+          </label>
+        </div>
+
+        <div>
+          <label
+            for="Option2"
+            class="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
+            tabindex="0"
+          >
+            <input value="manual" class="sr-only" id="Option2" type="radio" tabindex="-1" name="reservation_method" />
+
+            <span class="text-sm">manual</span>
+          </label>
+        </div>
+
+
+      </div>
+
+{{-- selector method accept? --}}
 
     </label>
 
@@ -89,7 +111,7 @@ class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
     class="flex flex-col gap-y-1 mt-8">
     Categories
     <select
-    class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
+    class="w-full rounded-lg border-gray-200 p-3 text-sm"
 id="category_id"
 
     name="category_id">
@@ -110,7 +132,7 @@ id="category_id"
 class="flex flex-col gap-y-1 mt-8">
 description
     <textarea rows="4"  type="text" id="description" name="description"
-class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
+class="w-full rounded-sm border-gray-200 p-3 text-sm"
     placeholder="Enter description">  {{@old('description')}}</textarea>
 </label>
 

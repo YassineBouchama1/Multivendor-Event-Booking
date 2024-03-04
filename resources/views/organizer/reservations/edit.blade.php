@@ -71,41 +71,17 @@ class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
     placeholder="Enter date">
 </label>
 
-{{-- selector method accept? --}}
-
 <div class="flex justify-start flex-col md:flex-row md:items-center items-start gap-x-4">
     <label for="reservation_method"
     class="flex flex-col gap-y-1 mt-8">
     Accepte Reservation Method
-    <div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
-        <div>
-          <label
-            for="Option1"
-            class="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
-            tabindex="0"
-          >
-            <input {{ $event->reservation_method == 'automatic' ? 'checked' : '' }} value="automatic" class="sr-only" id="Option1" type="radio" tabindex="-1" name="reservation_method" />
 
-            <span class="text-sm">automatic</span>
-          </label>
-        </div>
-
-        <div>
-          <label
-            for="Option2"
-            class="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
-            tabindex="0"
-          >
-            <input {{ $event->reservation_method == 'manual' ? 'checked' : '' }} value="manual" class="sr-only" id="Option2" type="radio" tabindex="-1" name="reservation_method" />
-
-            <span class="text-sm">manual</span>
-          </label>
-        </div>
+    <select class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600" name="reservation_method">
+        <option value="manual" {{ $event->reservation_method == 'manual' ? 'selected' : '' }}>Manual</option>
+        <option value="automatic" {{ $event->reservation_method == 'automatic' ? 'selected' : '' }}>Automatic</option>
+    </select>
 
 
-      </div>
-
-{{-- selector method accept? --}}
     </label>
 
     <label for="category_id"

@@ -3,8 +3,10 @@
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\UsersController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Organizer\EventController;
 use App\Http\Controllers\Organizer\OrganizerDashboardController;
+use App\Http\Controllers\Organizer\ReservationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +44,9 @@ Route::middleware(['auth', 'verified', 'checkrole:organizer'])->prefix('/organiz
     Route::resource('/', OrganizerDashboardController::class)->except(['show']);
 
     Route::resource('/events', EventController::class)->except(['show']);
+    Route::resource('/reservations', ReservationController::class)->except(['show']);
+    Route::patch('/reservations/{reservation}', [ReservationController::class, 'confirmed'])->name('reservations.confirmed');
+    Route::patch('/reservations/{reservation}', [ReservationController::class, 'canceled'])->name('reservations.canceled');
 });
 
 
@@ -53,12 +58,18 @@ Route::middleware(['auth', 'verified', 'checkrole:user'])->prefix('/user')->grou
 });
 
 
+//routes for guest
+Route::prefix('/')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home.index');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
 
 
 //this route for not authrized users
