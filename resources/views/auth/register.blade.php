@@ -43,7 +43,43 @@
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
         </div>
-<input type="text" name="is_admin" hidden>
+
+
+{{-- selector method accept? --}}
+
+<div class="flex justify-start flex-col md:flex-row md:items-center items-start gap-x-4">
+    <label for="reservation_method"
+    class="flex flex-col gap-y-1 mt-8">
+    Accepte Reservation Method
+    <div class="grid grid-cols-1 gap-4 text-center sm:grid-cols-3">
+        <div>
+          <label
+            for="Option1"
+            class="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
+            tabindex="0"
+          >
+            <input value="is_organizer" class="sr-only" id="Option1" type="radio" tabindex="-1" name="role" />
+
+            <span class="text-sm">Organizer</span>
+          </label>
+        </div>
+
+        <div>
+          <label
+            for="Option2"
+            class="block w-full cursor-pointer rounded-lg border border-gray-200 p-3 text-gray-600 hover:border-black has-[:checked]:border-black has-[:checked]:bg-black has-[:checked]:text-white"
+            tabindex="0"
+          >
+            <input checked value="is_user" class="sr-only" id="Option2" type="radio" tabindex="-1" name="role" />
+
+            <span class="text-sm">Customer</span>
+          </label>
+        </div>
+
+
+      </div>
+
+{{-- selector method accept? --}}
         <div class="flex items-center justify-end mt-4">
             <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
                 {{ __('Already registered?') }}
