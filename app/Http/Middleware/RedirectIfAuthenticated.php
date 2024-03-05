@@ -26,9 +26,12 @@ class RedirectIfAuthenticated
                 if (Auth::user()->hasRole('user')) {
                     //for users
                     return redirect(RouteServiceProvider::PROFILE);
-                } else {
+                } elseif (Auth::user()->hasRole('admin')) {
                     // for admin and organize
-                    return redirect(RouteServiceProvider::HOME);
+                    return redirect(RouteServiceProvider::ADMIN);
+                } elseif (Auth::user()->hasRole('organizer')) {
+                    // for admin and organize
+                    return redirect(RouteServiceProvider::ORGANIZER);
                 }
             }
         }

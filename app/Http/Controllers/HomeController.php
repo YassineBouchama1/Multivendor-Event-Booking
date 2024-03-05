@@ -27,7 +27,7 @@ class HomeController extends Controller
             $query->where('title', 'like', "%$search%");
         }
 
-        $events = $query->paginate(5);
+        $events = $query->paginate(1);
 
         // fetch all categories
         $categories = Category::all();
@@ -36,6 +36,11 @@ class HomeController extends Controller
     }
 
 
+    public function eventDetails(Event $event)
+    {
+        // dd($event);
+        return view('guest.eventDetails', compact('event'));
+    }
 
 
     public function registerUser()

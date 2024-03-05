@@ -37,9 +37,10 @@
              class="w-[80%] bg-white rounded-lg focus:outline-white border-white focus:border-white	 hover:cursor-pointer"
              name="search">
         </div>
-          <button type="submit" class="w-1/4 bg-mainColorDashboard text-white h-full self-end">Find Event</button>
+          <button type="submit" class="w-1/4 bg-mainColorhome text-white h-full self-end">Find Event</button>
         </form>
       </div>
+
     </div>
   </div>
 

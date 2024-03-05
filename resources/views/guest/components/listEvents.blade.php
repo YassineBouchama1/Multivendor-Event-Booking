@@ -1,21 +1,19 @@
 
 <h2 class="text-3xl md:text-6xl font-bold text-center w-full py-8">Explore Our Events</h2>
+<h4 class="text-sm font-bold text-center w-full ">Cound: <span>{{ $events->count() }}</span></h4>
 
 
 
 <section id="Projects"
-    class="w-fit h-full mb-10 flex justify-center flex-col items-center">
-<div    class=" pb-10 w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
-<div id="events-container"></div>
-<div id="pagination-links"></div>
-<h4>Cound: <span>{{ $events->count() }}</span></h4>
+class=" pb-10 w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
+
 
 
     @forelse($events as $event)
 
 
 <div class="w-72 bg-white shadow-md rounded-sm duration-500 hover:scale-105 hover:shadow-xl">
-    <a href="#">
+    <a href="{{route('home.eventDetails',['event'=>$event['id']])}}">
         <img src="https://images.unsplash.com/photo-1646753522408-077ef9839300?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8NjZ8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
                 alt="Product" class=" h-56 w-72 object-cover rounded-t-sm" />
 
@@ -44,11 +42,12 @@
 
 
 @empty
-<td class="hover:bg-gray-100">No user available</td>
+<td >No events available</td>
 
 @endforelse
-</div>
-{{ $events->links() }}
+
+</section>
+<div class="self-center pb-6 flex flex-col">{{ $events->links() }}</div>
 
 
 

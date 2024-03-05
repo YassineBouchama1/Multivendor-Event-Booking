@@ -17,12 +17,33 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
 
-    <body class=" flex  flex-col w-full  h-full bg-backgroundHome  text-base font-normal leading-5 font-sans">
+
+    <body class="relative flex  flex-col w-full  h-full bg-backgroundHome  text-base font-normal leading-5 font-sans">
+<div id="loading-spinner" class="loading-spinner absolute top-0 left-0 right-0 b-0" style="display: none;"></div>
 
     <!-- Header Start -->
 
     @include('guest/components.header')
             @yield('content')
 
+            <script>
+// Show spinner on page load
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('loading-spinner').style.display = 'block';
+});
+
+// Hide spinner when page has finished loading
+window.onload = function() {
+    document.getElementById('loading-spinner').style.display = 'none';
+};
+
+// Show spinner when navigating to a new page
+document.addEventListener("click", function(event) {
+    if (event.target.tagName === 'A') {
+        document.getElementById('loading-spinner').style.display = 'block';
+    }
+});
+
+            </script>
     </body>
 </html>

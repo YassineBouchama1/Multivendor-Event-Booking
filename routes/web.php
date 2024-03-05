@@ -63,6 +63,7 @@ Route::middleware(['auth', 'verified', 'checkrole:user'])->prefix('/user')->grou
 // Routes for guests
 Route::prefix('/')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
+    Route::get('/eventDetails/{event}', [HomeController::class, 'eventDetails'])->name('home.eventDetails');
 
     Route::middleware('guest')->group(function () {
         Route::get('registerUser', [HomeController::class, 'registerUser']);
