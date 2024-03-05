@@ -1,6 +1,49 @@
 
 <h2 class="text-3xl md:text-6xl font-bold text-center w-full py-8">Explore Our Events</h2>
-<div> </div>
+<div class="flex justify-center">
+
+    <form class="flex justify-between items-center gap-2 flex-wrap ">
+
+    <label
+    for="Option1"
+    class="block bg-transparent text-base font-bold hover:text-white hover:bg-mainColorhome duration-300   cursor-pointer   rounded-sm px-3   has-[:checked]:bg-mainColorhome has-[:checked]:text-white"
+    tabindex="0"
+  >
+    <input checked value="automatic" class="sr-only" id="Option1" type="radio" tabindex="-1" name="reservation_method" />
+
+    <span class="">All</span>
+  </label>
+  <label
+  for="Option1"
+  class="block bg-transparent text-base font-bold hover:text-white hover:bg-mainColorhome duration-300   cursor-pointer   rounded-sm px-3   has-[:checked]:bg-mainColorhome has-[:checked]:text-white"
+  tabindex="0"
+>
+  <input value="automatic" class="sr-only" id="Option1" type="radio" tabindex="-1" name="reservation_method" />
+
+  <span class="">Web</span>
+</label>
+
+<label
+for="Option1"
+class="block bg-transparent text-base font-bold hover:text-white hover:bg-mainColorhome duration-300   cursor-pointer   rounded-sm px-3   has-[:checked]:bg-mainColorhome has-[:checked]:text-white"
+tabindex="0"
+>
+<input value="automatic" class="sr-only" id="Option1" type="radio" tabindex="-1" name="reservation_method" />
+
+<span class="">Sport</span>
+</label>
+<label
+for="Option1"
+class="block bg-transparent text-base font-bold hover:text-white hover:bg-mainColorhome duration-300   cursor-pointer   rounded-sm px-3   has-[:checked]:bg-mainColorhome has-[:checked]:text-white"
+tabindex="0"
+>
+<input value="automatic" class="sr-only" id="Option1" type="radio" tabindex="-1" name="reservation_method" />
+
+<span class="">Javascript</span>
+</label>
+
+
+</form> </div>
 <section id="Projects"
     class="w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
 
