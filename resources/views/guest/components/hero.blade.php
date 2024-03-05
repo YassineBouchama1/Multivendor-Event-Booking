@@ -9,15 +9,21 @@
       class="absolute bottom-0 left-0 right-0 top-0 h-full w-full overflow-hidden bg-fixed"
       style="background-color: rgba(0, 0, 0, 0.75)">
       <div class="flex h-full items-center justify-center">
-        <form class=" text-center flex justify-between items-center  mx-4 h-14 rounded-sm bg-white">
+        <form method="GET" action="{{route('home.index')}}"
+        class=" text-center flex justify-between items-center  mx-4 h-14 rounded-sm bg-white">
           <div class="border-r-2">
 
-    <select  class="w-auto border-none outline-none ocus:ring-white focus:border-white hover:cursor-pointer">
-      <option selected value="" disabled>All categories</option>
-      <option value="US">United States</option>
-      <option value="CA">Canada</option>
-      <option value="FR">France</option>
-      <option value="DE">Germany</option>
+    <select
+    name="category_id"
+    class="w-auto border-none outline-none ocus:ring-white focus:border-white hover:cursor-pointer">
+      <option selected value="null" >All categories</option>
+      @foreach($categories as $category)
+
+      <option {{ (request()->get('category_id') == $category->id) ? 'selected' : '' }}
+        value="{{ $category->id }}">{{ $category->name }}</option>
+
+
+      @endforeach
     </select>
 
 
@@ -26,10 +32,14 @@
           {{-- searhc input --}}
           <div class="border-r-2 w-full flex flext-start items-center">
             <i class="fa-solid fa-magnifying-glass text-xl px-3"></i>
-            <input type="text" class="w-[80%] bg-white rounded-lg focus:outline-white border-white focus:border-white	 hover:cursor-pointer" name="">
+            <input type="text"
+            value="{{request()->get('search')}}"
+             class="w-[80%] bg-white rounded-lg focus:outline-white border-white focus:border-white	 hover:cursor-pointer"
+             name="search">
         </div>
-          <button class="w-1/4 bg-mainColorDashboard text-white h-full self-end">Find Event</button>
+          <button type="submit" class="w-1/4 bg-mainColorDashboard text-white h-full self-end">Find Event</button>
         </form>
       </div>
     </div>
   </div>
+

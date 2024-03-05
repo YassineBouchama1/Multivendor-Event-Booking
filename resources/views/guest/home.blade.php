@@ -6,4 +6,10 @@
 
 @include('guest.components.hero')
 @include('guest.components.listEvents')
+
+</section>
+
+
+
+
 @endsection
