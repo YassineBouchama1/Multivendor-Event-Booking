@@ -3,6 +3,24 @@
 
 
 @section('content')
+@if($errors->any())
+
+<ul>
+    @foreach ($errors->all() as $error)
+
+        <li class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <span class="font-medium">Danger alert!</span> {{ $error }}
+          </li>
+@endforeach
+</ul>
+
+@endif
+@if ($message = Session::get('success'))
+
+<div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+    <span class="font-medium">Success alert!</span> {{$message}}
+  </div>
+@endif
 <div class="bg-gray-100">
     <div class="container mx-auto py-8">
         <div class="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">

@@ -46,10 +46,28 @@
               Mike writes about technology
               Yourself required no at thoughts delicate landlord it be. Branched dashwood do is whatever it.
             </p>
+
+            @hasrole('user')
+            <form method="POST" action="{{route('user.booking',['event'=>$event->id])}}">
+                @csrf
             <button class="px-2 py-1 text-gray-100 bg-green-700 flex w-full items-center justify-center rounded">
                 Book Now
               <i class='bx bx-user-plus ml-2' ></i>
             </button>
+        </form>
+
+            @endhasrole
+            @guest
+            <form method="POST" action="{{route('user.booking',['event'=>$event->id])}}">
+                @csrf
+                <button type="submit" class="px-2 py-1 text-gray-100 bg-green-700 flex w-full items-center justify-center rounded">
+                    Book Now
+                    <i class='bx bx-user-plus ml-2' ></i>
+                </button>
+            </form>
+            @endguest()
+
+
           </div>
         </div>
       </div>

@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Organizer\EventController;
 use App\Http\Controllers\Organizer\OrganizerDashboardController;
 use App\Http\Controllers\Organizer\ReservationController;
+use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
@@ -55,6 +56,10 @@ Route::middleware(['auth', 'verified', 'checkrole:organizer'])->prefix('/organiz
 //routes for users
 Route::middleware(['auth', 'verified', 'checkrole:user'])->prefix('/user')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('user.index');
+    Route::post('/eventDetails/{event}', [ReservationController::class, 'store'])->name('user.booking');
+
+    Route::get('view-pdf/{reservation}', [PDFController::class, 'viewPDF'])->name('ticketPdf');
+    Route::get('generate-pdf/{reservation}', [PDFController::class, 'generatePDF'])->name('downloadTicket');
 });
 
 

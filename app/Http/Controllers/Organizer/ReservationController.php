@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Organizer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReservationController extends Controller
 {
@@ -31,10 +33,23 @@ class ReservationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Event $event)
     {
-        //
+        // determine whether the status is confirmed or unconfirmed based on the event is reservation method
+        $status = $event->reservation_method === 'manual' ? 'confirmed' : 'unconfirmed';
+
+        // Ccreate a new reservation
+        $reservationCreated = Reservation::create([
+            'event_id' => $event->id,
+            'user_id' => Auth::user()->id,
+            'status' => $status
+        ]);
+
+        return redirect()->route('user.index')->with('success', 'Booked Event Successfully');
     }
+
+
+
 
     /**
      * Display the specified resource.
@@ -78,7 +93,7 @@ class ReservationController extends Controller
 
         return redirect()->route('reservations.index')->with('success', 'reservation Accepted successfully.');;
     }
-    
+
     public function canceled(Reservation $reservation)
     {
 
