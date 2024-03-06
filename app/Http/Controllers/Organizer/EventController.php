@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Organizer;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Event;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,8 +17,13 @@ class EventController extends Controller
         $events = Event::get();
 
 
+        //bring all counts of events and reservations
+        $eventWaiting = Auth::user()->events->where('status', '=', 'waiting')->count();
+        $activeEvents = Auth::user()->events->where('status', '=', 'approved')->count();
+        $reservations = Auth::user()->reservations->count();
 
-        return view('organizer.events.index', compact('events'));
+
+        return view('organizer.events.index', compact('events', 'eventWaiting', 'activeEvents', 'reservations'));
     }
 
 

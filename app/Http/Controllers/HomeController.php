@@ -28,7 +28,7 @@ class HomeController extends Controller
             $query->where('title', 'like', "%$search%");
         }
 
-        //
+      
         $query->where('status', '!=', 'ended')
             ->where('status', '!=', 'canceled')
             ->where('status', '!=', 'waiting');

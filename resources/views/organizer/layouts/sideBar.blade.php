@@ -29,13 +29,13 @@
 
         </a>
       </li>
-      <li id="mainlink" class=" mt-1 cursor-pointer 	text-black duration-300   no-underline   whitespace-nowrap   text-lg p-2 sm:p-3 sm:pl-6 rounded-tr-md rounded-br-md font-normal leading-6">
+      {{-- <li id="mainlink" class=" mt-1 cursor-pointer 	text-black duration-300   no-underline   whitespace-nowrap   text-lg p-2 sm:p-3 sm:pl-6 rounded-tr-md rounded-br-md font-normal leading-6">
         <a href="{{route('reservations.index')}}" class="">
           <i class="ti ti-home h-[24px] w-[24px]  "></i>
           <span>Reservations</span>
 
         </a>
-      </li>
+      </li> --}}
 
     </ul>
 

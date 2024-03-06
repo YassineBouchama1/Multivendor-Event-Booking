@@ -18,7 +18,6 @@ class ReservationController extends Controller
         $reservations = Reservation::get();
 
 
-
         return view('organizer.reservations.index', compact('reservations'));
     }
 
@@ -28,6 +27,8 @@ class ReservationController extends Controller
         $reservationCount = Reservation::count();
         //check if there is a place
         if ($event->places >= $reservationCount) {
+            $event->status = 'fulled';
+            $event->save();
             return redirect()->route('home.index')->with('error', 'event is fulled');
         }
 
@@ -41,6 +42,13 @@ class ReservationController extends Controller
             'user_id' => Auth::user()->id,
             'status' => $status
         ]);
+        $reservationCountUpdated = Reservation::count();
+
+        if ($event->places >= $reservationCountUpdated) {
+            $event->status = 'fulled';
+            $event->save();
+        }
+
         return redirect()->route('user.index')->with('success', 'Booked Event Successfully');
     }
 

@@ -74,17 +74,13 @@
 
 
 </div>
+</div>
+<div class=" flex justify-center  w-4/6 ">
+    <canvas id="myChart" height="100px"></canvas>
 
 
-
-
-
-
-        </div>
-
-
+   </div>
         @include('admin.components.events', $events)
-
 
 
 

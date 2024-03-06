@@ -7,6 +7,7 @@ use App\Models\Event;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 
 class AdminDashboardController extends Controller
@@ -25,6 +26,7 @@ class AdminDashboardController extends Controller
         $eventCount = Event::count();
 
 
-        return view('admin.index', compact('events', 'eventCount', 'usersCount', 'organizersCount'));
+
+        return view('admin.index', compact('events', 'eventCount', 'usersCount', 'organizersCount',));
     }
 }
