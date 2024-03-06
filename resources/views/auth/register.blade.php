@@ -1,9 +1,13 @@
 <x-guest-layout>
     <form method="POST" action="{{ route('register') }}">
         @csrf
-
+        <div id="isOrganizer" class="">
+            <x-input-label for="organizerName" :value="__('organizerName')" />
+            <x-text-input id="organizerName" class="block mt-1 w-full" type="text" name="organizerName" :value="old('organizerName')" required autofocus autocomplete="organizerName" />
+            <x-input-error :messages="$errors->get('organizerName')" class="mt-2" />
+        </div>
         <!-- Name -->
-        <div>
+        <div class="mt-4">
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
@@ -90,4 +94,27 @@
             </x-primary-button>
         </div>
     </form>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var radios = document.querySelectorAll('input[name="role"]');
+            var organizerDiv = document.getElementById('isOrganizer');
+
+            function toggleOrganizerVisibility() {
+                var roleValue = document.querySelector('input[name="role"]:checked').value;
+                if (roleValue === 'is_user') {
+                    organizerDiv.classList.add('hidden');
+                } else {
+                    organizerDiv.classList.remove('hidden');
+                }
+            }
+
+            radios.forEach(function (radio) {
+                radio.addEventListener('change', toggleOrganizerVisibility);
+            });
+
+            // Initial call to set the initial visibility based on the default checked radio
+            toggleOrganizerVisibility();
+        });
+    </script>
 </x-guest-layout>

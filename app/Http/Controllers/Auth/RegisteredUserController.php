@@ -38,6 +38,16 @@ class RegisteredUserController extends Controller
             'address' => ['required'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
+
+        //if regsiter for ogranzier validate name
+        if ($request->role === 'is_organizer' && $request->role === 'is_organizer') {
+            $request->validate([
+                'organizerName' => ['required', 'string', 'max:255', 'unique:' . User::class],
+            ]);
+        }
+
+
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -45,12 +55,13 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // determine role user
-        if ($request->has('is_admin')) {
-            //assign role
-            $userRole = Role::findByName('admin');
-            $user->assignRole($userRole);
-        }
+
+        // //assign role for admin
+        // $userRole = Role::findByName('admin');
+        // $user->assignRole($userRole);
+
+
+
 
         if ($request->role === 'is_user') {
             // dd('has user');
@@ -59,9 +70,12 @@ class RegisteredUserController extends Controller
             $user->assignRole($userRole);
         }
         if ($request->role === 'is_organizer') {
-            //assign role
+            //assign role & name organizer
             $userRole = Role::findByName('organizer');
             $user->assignRole($userRole);
+
+            $user->organizerName = $request->organizerName;
+            $user->save();
         }
 
 

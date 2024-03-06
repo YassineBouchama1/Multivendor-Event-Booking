@@ -32,23 +32,53 @@
 
         </div>
 
-        <div class="w-full lg:w-1/4 m-auto mt-12 max-w-screen-sm">
+        <div class="w-full lg:w-1/4 m-auto mt-12 max-w-screen-sm ">
           <div class="p-4 border-t border-b md:border md:rounded">
             <div class="flex py-2">
-              <img src="https://randomuser.me/api/portraits/men/97.jpg"
-                class="h-10 w-10 rounded-full mr-2 object-cover" />
-              <div>
-                <p class="font-semibold text-gray-700 text-sm"> Mike Sullivan </p>
-                <p class="font-semibold text-gray-600 text-xs"> Editor </p>
+
+              <div class="text-center">
+<h2 class="text-2xl font-bold pb-2">Event Starts In</h2>
+<hr class="py-2">
+                <div id="countdown" class="flex justify-center items-center gap-x-2 min-h-6">
+
+                    <div  class="flex items-center justify-center flex-col">
+                        <div class="bg-transparent w-10 h-10 rounded-full border-2 flex items-center justify-center">000</div>
+                        <h4 class="font-semibold text-gray-700 text-xs">days</h4>
+                    </div>
+                    <div  class="flex items-center justify-center flex-col">
+                        <div class="bg-transparent w-10 h-10 rounded-full border-2 flex items-center justify-center">00</div>
+                        <h4 class="font-semibold text-gray-700 text-xs">hours</h4>
+                    </div>
+                    <div  class="flex items-center justify-center flex-col">
+                        <div class="bg-transparent w-10 h-10 rounded-full border-2 flex items-center justify-center">00</div>
+                        <h4 class="font-semibold text-gray-700 text-xs">minutes</h4>
+                    </div>
+                    <div  class="flex items-center justify-center flex-col">
+                        <div class="bg-transparent w-10 h-10 rounded-full border-2 flex items-center justify-center">00</div>
+                        <h4 class="font-semibold text-gray-700 text-xs">seconds</h4>
+                    </div>
+                </div>
+
+
               </div>
             </div>
-            <p class="text-gray-700 py-3">
-              Mike writes about technology
-              Yourself required no at thoughts delicate landlord it be. Branched dashwood do is whatever it.
-            </p>
+            <hr class="py-2">
+            <div class="text-2xl font-bold flex justify-between pb-4">
+                <p>Total Price :</p>
+                @if($event->price == 0)
+                    <p class="text-mainColorhome">Free</p>
+                @else
+                    <p>${{ $event->price }}</p>
+                @endif
+            </div>
+
+
+            <hr class="py-2">
+<div > <p class="w-full"><i class="fa-solid fa-location-dot"></i>454 Isaac Frye Hwy, Wilton, United States</p></div>
+<hr class="py-2">
 
             @hasrole('user')
-            <form method="POST" action="{{route('user.booking',['event'=>$event->id])}}">
+            <form id="bookingBtn" method="POST" action="{{route('user.booking',['event'=>$event->id])}}">
                 @csrf
             <button class="px-2 py-1 text-gray-100 bg-green-700 flex w-full items-center justify-center rounded">
                 Book Now
@@ -58,7 +88,7 @@
 
             @endhasrole
             @guest
-            <form method="POST" action="{{route('user.booking',['event'=>$event->id])}}">
+            <form id="bookingBtn" method="POST" action="{{route('user.booking',['event'=>$event->id])}}">
                 @csrf
                 <button type="submit" class="px-2 py-1 text-gray-100 bg-green-700 flex w-full items-center justify-center rounded">
                     Book Now
@@ -121,4 +151,54 @@
     </footer>
   </div>
 
+  <script>
+    let targetDate = "{{ $event->start_date }}";
+
+    let countdown = setInterval(function() {
+        let now = new Date().getTime();
+
+        // Calculate the remaining time
+        let distance = new Date(targetDate) - now;
+
+        // Calculate days, hours, minutes, and seconds
+        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        // Display the countdown
+        document.getElementById("countdown").innerHTML =`
+        <div id="countdown" class="flex items-center justify-center flex-col">
+                    <div class="bg-transparent w-10 h-10 rounded-full border-2 flex items-center justify-center">
+                        ${days}</div>
+                    <h4 class="font-semibold text-gray-700 text-xs">days</h4>
+                </div>
+                <div id="countdown" class="flex items-center justify-center flex-col">
+                    <div class="bg-transparent w-10 h-10 rounded-full border-2 flex items-center justify-center">
+                        ${hours}</div>
+                    <h4 class="font-semibold text-gray-700 text-xs">hours</h4>
+                </div>
+                <div id="countdown" class="flex items-center justify-center flex-col">
+                    <div class="bg-transparent w-10 h-10 rounded-full border-2 flex items-center justify-center">
+                        ${minutes}</div>
+                    <h4 class="font-semibold text-gray-700 text-xs">minutes</h4>
+                </div>
+                <div id="countdown" class="flex items-center justify-center flex-col">
+                    <div class="bg-transparent w-10 h-10 rounded-full border-2 flex items-center justify-center">
+                        ${seconds}</div>
+                    <h4 class="font-semibold text-gray-700 text-xs">seconds</h4>
+                </div>
+        `
+
+        days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+        // If the countdown is over, stop it and Disable Btn
+        if (distance < 0) {
+            clearInterval(countdown);
+            document.getElementById("countdown").innerHTML = "EXPIRED";
+            document.getElementById("bookingBtn").innerHTML = '';
+
+        }
+    }, 1000);
+</script>
   @endsection

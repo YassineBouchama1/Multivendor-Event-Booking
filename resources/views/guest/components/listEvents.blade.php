@@ -4,6 +4,15 @@
 
 
 
+{{-- // if there is a error display it here --}}
+@if ($message = Session::get('error'))
+
+<div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+    <span class="font-medium">Success alert!</span> {{$message}}
+  </div>
+@endif
+
+
 <section id="Projects"
 class=" pb-10 w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
 

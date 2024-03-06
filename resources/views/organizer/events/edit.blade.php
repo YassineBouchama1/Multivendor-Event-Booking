@@ -58,19 +58,25 @@ class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
 
 <label for="city"
 class="flex flex-col gap-y-1 mt-8">
-city
-    <input  type="text" id="city" name="city"  value="{{$event['city']}}"
+location
+    <input  type="text" id="location" name="location"  value="{{$event['location']}}"
 class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
-    placeholder="Enter city">
+    placeholder="Enter location">
 </label>
 <label for="places"
 class="flex flex-col gap-y-1 mt-8">
-date
-    <input  type="datetime-local" id="date" name="date"  value="{{$event['date']}}"
+start date
+    <input  type="datetime-local" id="start_date" name="start_date"  value="{{$event['start_date']}}"
 class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
-    placeholder="Enter date">
+    placeholder="Enter start date">
 </label>
-
+<label for="places"
+class="flex flex-col gap-y-1 mt-8">
+start end
+    <input  type="datetime-local" id="start_end" name="start_end"  value="{{$event['start_end']}}"
+class="rounded-sm border-md border-gray-200 forced-colors:text-blue-600"
+    placeholder="Enter start end">
+</label>
 {{-- selector method accept? --}}
 
 <div class="flex justify-start flex-col md:flex-row md:items-center items-start gap-x-4">

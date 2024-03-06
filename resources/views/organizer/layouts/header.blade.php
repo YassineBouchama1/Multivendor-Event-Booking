@@ -34,10 +34,7 @@
 
 <div class="flex flex-row items-center gap-3 ml-auto md:ml-12">
 
-    <img src="" class="w-8 h-8 rounded-full bg-[black]"></div>
-    <div class="">
-        <p class="font-semibold text-xs ">{{ Auth::user()->name }}</p>
-        <p class="font-light text-xs ">{{ Auth::user()->hasRole('admin') ?  'admin':'organized' }}</p></div>
+
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">

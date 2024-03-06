@@ -20,11 +20,12 @@ return new class extends Migration
             $table->decimal('location_longitude', 11, 8);
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('organizer_id')->constrained('users');
-            $table->dateTime('date');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
             $table->decimal('price');
             $table->integer('places');
-            $table->string('city');
-            $table->enum('status', ['waiting', 'approved', 'canceled', 'ended'])
+            $table->string('location');
+            $table->enum('status', ['waiting', 'approved', 'fulled', 'canceled', 'ended'])
                 ->default('waiting');
             $table->enum('reservation_method', ['manual', 'automatic'])->default('automatic');
             $table->softDeletes();

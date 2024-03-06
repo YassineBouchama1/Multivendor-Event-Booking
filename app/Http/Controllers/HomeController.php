@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Event;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,6 +28,10 @@ class HomeController extends Controller
             $query->where('title', 'like', "%$search%");
         }
 
+        //
+        $query->where('status', '!=', 'ended')
+            ->where('status', '!=', 'canceled');
+
         $events = $query->paginate(1);
 
         // fetch all categories
@@ -38,8 +43,18 @@ class HomeController extends Controller
 
     public function eventDetails(Event $event)
     {
-        // dd($event);
-        return view('guest.eventDetails', compact('event'));
+
+        if ($event->status === 'approved') {
+
+            $carbonDate = Carbon::parse($event->start_date);
+            // Get the month name
+            $monthName = $carbonDate->format('F');
+            // Get the day number
+            $dayNumber = $carbonDate->format('d');
+            // dd($event);
+            return view('guest.eventDetails', compact('event'));
+        }
+        return 'expired or canceld';
     }
 
 

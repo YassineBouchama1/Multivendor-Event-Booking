@@ -22,19 +22,16 @@ class ReservationController extends Controller
         return view('organizer.reservations.index', compact('reservations'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, Event $event)
     {
+        $reservationCount = Reservation::count();
+        //check if there is a place
+        if ($event->places >= $reservationCount) {
+            return redirect()->route('home.index')->with('error', 'event is fulled');
+        }
+
+
         // determine whether the status is confirmed or unconfirmed based on the event is reservation method
         $status = $event->reservation_method === 'manual' ? 'confirmed' : 'unconfirmed';
 
@@ -44,7 +41,6 @@ class ReservationController extends Controller
             'user_id' => Auth::user()->id,
             'status' => $status
         ]);
-
         return redirect()->route('user.index')->with('success', 'Booked Event Successfully');
     }
 

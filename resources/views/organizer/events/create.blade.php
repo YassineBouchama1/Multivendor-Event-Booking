@@ -53,21 +53,27 @@ class="w-full rounded-lg border-gray-200 p-3 text-sm"
     placeholder="Enter places">
 </label>
 
-<label for="city"
+<label for="location"
 class="flex flex-col gap-y-1 mt-8">
-city
-    <input  type="text" id="city" name="city"  value="{{@old('city')}}"
+location
+    <input  type="text" id="location" name="location"  value="{{@old('location')}}"
 class="w-full rounded-lg border-gray-200 p-3 text-sm"
-    placeholder="Enter city">
+    placeholder="Enter location">
 </label>
 <label for="places"
 class="flex flex-col gap-y-1 mt-8">
-date
-    <input  type="datetime-local" id="date" name="date"  value="{{@old('date')}}"
+start date
+    <input  type="datetime-local" id="start_date" name="start_date"  value="{{@old('start_date')}}"
 class="w-full rounded-lg border-gray-200 p-3 text-sm"
-    placeholder="Enter date">
+    placeholder="Enter start date">
 </label>
-
+<label for="places"
+class="flex flex-col gap-y-1 mt-8">
+start end
+    <input  type="datetime-local" id="end_date" name="end_date"  value="{{@old('end_date')}}"
+class="w-full rounded-lg border-gray-200 p-3 text-sm"
+    placeholder="Enter start end">
+</label>
 
 {{-- selector method accept? --}}
 
