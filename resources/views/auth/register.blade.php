@@ -1,13 +1,17 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
         @csrf
-        <div id="isOrganizer" class="">
-            <x-input-label for="organizerName" :value="__('organizerName')" />
-            <x-text-input id="organizerName" class="block mt-1 w-full" type="text" name="organizerName" :value="old('organizerName')" required autofocus autocomplete="organizerName" />
-            <x-input-error :messages="$errors->get('organizerName')" class="mt-2" />
+        <img id="avatar" src="{{asset('avatars') .'/'.'a1.jpg'}}" class="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0">
+
+    </img>
+        <div>
+            <input id="image" class="block mt-1 w-full" type="file" name="image"  />
+            {{-- <x-input-label for="image" :value="__('image')" /> --}}
+
         </div>
+
         <!-- Name -->
-        <div class="mt-4">
+        <div>
             <x-input-label for="name" :value="__('Name')" />
             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
@@ -96,25 +100,42 @@
     </form>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var radios = document.querySelectorAll('input[name="role"]');
-            var organizerDiv = document.getElementById('isOrganizer');
+document.addEventListener('DOMContentLoaded', function () {
+    let image = document.getElementById('image');
+    let avatar = document.getElementById('avatar');
 
-            function toggleOrganizerVisibility() {
-                var roleValue = document.querySelector('input[name="role"]:checked').value;
-                if (roleValue === 'is_user') {
-                    organizerDiv.classList.add('hidden');
-                } else {
-                    organizerDiv.classList.remove('hidden');
-                }
+    image.addEventListener('change', function(){
+        if (image.files && image.files[0]) {
+            let reader = new FileReader();
+
+            reader.onload = function(e) {
+                avatar.src = e.target.result;
             }
 
-            radios.forEach(function (radio) {
-                radio.addEventListener('change', toggleOrganizerVisibility);
-            });
+            reader.readAsDataURL(image.files[0]);
+        }
+    });
+});
 
-            // Initial call to set the initial visibility based on the default checked radio
-            toggleOrganizerVisibility();
-        });
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     var radios = document.querySelectorAll('input[name="role"]');
+        //     var organizerDiv = document.getElementById('isOrganizer');
+
+        //     function toggleOrganizerVisibility() {
+        //         var roleValue = document.querySelector('input[name="role"]:checked').value;
+        //         if (roleValue === 'is_user') {
+        //             organizerDiv.classList.add('hidden');
+        //         } else {
+        //             organizerDiv.classList.remove('hidden');
+        //         }
+        //     }
+
+        //     radios.forEach(function (radio) {
+        //         radio.addEventListener('change', toggleOrganizerVisibility);
+        //     });
+
+        //     // Initial call to set the initial visibility based on the default checked radio
+        //     toggleOrganizerVisibility();
+        // });
     </script>
 </x-guest-layout>

@@ -27,7 +27,7 @@
             <div class="col-span-4 sm:col-span-3">
                 <div class="bg-white shadow rounded-lg p-6">
                     <div class="flex flex-col items-center">
-                        <img src="https://randomuser.me/api/portraits/men/94.jpg" class="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0">
+                        <img src="{{asset('avatars') .'/'.$user->image}}" class="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0">
 
                         </img>
                         <h1 class="text-xl font-bold">{{$user->name}}</h1>

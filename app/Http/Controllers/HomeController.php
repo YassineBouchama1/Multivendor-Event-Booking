@@ -30,8 +30,8 @@ class HomeController extends Controller
 
         //
         $query->where('status', '!=', 'ended')
-            ->where('status', '!=', 'canceled');
-
+            ->where('status', '!=', 'canceled')
+            ->where('status', '!=', 'waiting');
         $events = $query->paginate(1);
 
         // fetch all categories

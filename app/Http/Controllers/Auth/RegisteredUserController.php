@@ -31,20 +31,21 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        // dd($request->address);
+        // dd($request->file('image'));
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255', 'unique:' . User::class],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'address' => ['required'],
+            'image' => ['nullable', 'image'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
         //if regsiter for ogranzier validate name
-        if ($request->role === 'is_organizer' && $request->role === 'is_organizer') {
-            $request->validate([
-                'organizerName' => ['required', 'string', 'max:255', 'unique:' . User::class],
-            ]);
-        }
+        // if ($request->role === 'is_organizer') {
+        //     $request->validate([
+        //         'organizerName' => ['required', 'string', 'max:255', 'unique:' . User::class],
+        //     ]);
+        // }
 
 
 
@@ -74,9 +75,23 @@ class RegisteredUserController extends Controller
             $userRole = Role::findByName('organizer');
             $user->assignRole($userRole);
 
-            $user->organizerName = $request->organizerName;
+            // $user->organizerName = $request->organizerName;
+            // $user->save();
+        }
+
+        // update image if it passing with request
+        if ($request->image) {
+            $image = $request->file('image');
+            // dd($image);
+            $imageName = time() . '.' . $image->extension();
+            $image->move(public_path('avatars'), $imageName);
+            $user->image = $imageName;
+            $user->save();
+        } else {
+            $user->image = 'a1.jpg';
             $user->save();
         }
+
 
 
         event(new Registered($user));
