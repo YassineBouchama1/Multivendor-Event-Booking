@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Organizer;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ReservationMail;
 use App\Models\Event;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class ReservationController extends Controller
 {
@@ -90,7 +92,17 @@ class ReservationController extends Controller
             'user_id' => Auth::user()->id,
             'status' => $status
         ]);
+
+
+        //send email that reservation coonfirm
+        if ($event->reservation_method === 'automatic') {
+            Mail::to(Auth::user()->email)->send(new ReservationMail($reservationCreated));
+        }
+
+
+        // check if event full
         $reservationCountUpdated = Reservation::count();
+
 
         if ($reservationCountUpdated >= $event->places) {
             $event->status = 'fulled';
@@ -115,6 +127,11 @@ class ReservationController extends Controller
 
         $reservation->save();
 
+
+        // after confirm reservation send email
+        if ($reservation->status === 'confirmed') {
+            Mail::to($reservation->user->email)->send(new ReservationMail($reservation));
+        }
         return redirect()->route('reservations.index')->with('success', 'reservation Accepted successfully.');;
     }
 
