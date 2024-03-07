@@ -37,7 +37,7 @@
 
                <!-- Header StaEndrt -->
                <!--  start page content  -->
-               <main id="mainSide" class="  top-14  absolute h-full pt-10   px-4   lg:px-8 left-0 lg:left-60 right-0   transition-all duration-300 ease-in-out ">
+               <main id="mainSide" class="  top-14  absolute h-full pt-10   px-4   md:px-8 left-0 lg:left-60 right-0   transition-all duration-300 ease-in-out ">
                     <h2 class="text-3xl font-bold pb-4"> @yield('title')</h2>
                     @yield('content')
                 </main>
@@ -56,6 +56,7 @@
         let mainSideHeader = document.getElementById('mainSideHeader');
         let mainSide = document.getElementById('mainSide');
 
+        console.log('main')
 
         toggleSideBar.addEventListener('click', onToggle);
 
@@ -63,20 +64,16 @@
 
 
         function onToggle() {
-            if (sidebar_dash.classList.contains('left-[-100%]')) {
-                sidebar_dash.classList.remove('left-[-100%]');
-                mainSide.classList.remove('lg:left-100')
-                mainSide.classList.add('lg:left-60')
-                mainSideHeader.classList.remove('lg:left-100')
-                mainSideHeader.classList.add('lg:left-60')
-                sidebar_dash.classList.add('left-0');
+            if (sidebar_dash.classList.contains('left-0')) {
+                sidebar_dash.classList.remove('left-0')
+
+                sidebar_dash.classList.add('left-60')
+
             } else {
-                mainSideHeader.classList.remove('lg:left-60')
-                mainSideHeader.classList.add('lg:left-100')
-                mainSide.classList.remove('lg:left-60')
-                mainSide.classList.add('lg:left-100')
-                sidebar_dash.classList.remove('left-0');
-                sidebar_dash.classList.add('left-[-100%]');
+                sidebar_dash.classList.remove('left-60')
+                sidebar_dash.classList.add('left-0')
+
+
             }
         }
 

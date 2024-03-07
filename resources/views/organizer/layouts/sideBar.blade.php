@@ -1,6 +1,6 @@
 
 
-<aside id="sidebar_dash" class="section w-60 bg-white transition-all duration-300 ease-in-out fixed z-40 max-lg:-translate-x-full max-lg:bg-surface-500 dark:max-lg:bg-surfacedark-500 left-0 top-0 bottom-0 h-screen  overflow-auto  ">
+<aside id="sidebar_dash" class="section w-60 left-0  bg-white transition-all duration-300 ease-in-out fixed z-40 max-lg:-translate-x-full max-lg:bg-surface-500 dark:max-lg:bg-surfacedark-500   top-0 bottom-0 h-screen  overflow-auto  ">
     <div class="h-[100px] p-5 flex justify-between ">
       <a class="text-center w-full " href="/admin/">
 
@@ -42,7 +42,6 @@
     <!-- body sidebar -->
 
   </aside>
-
 
 
 

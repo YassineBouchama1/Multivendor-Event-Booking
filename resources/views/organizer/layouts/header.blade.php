@@ -6,13 +6,21 @@
 
 
     <div class="  w-full  flex  gap-x-4 items-center">
-<button id="toggleSideBar" class="flex flex-col justify-center items-center gap-[0.5px] h-full ">
+<button id="toggleSideBar" class="flex  lg:hidden flex-col justify-center items-center gap-[0.5px] h-full ">
     <svg width="24px" height="auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M4 18L20 18" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
         <path d="M4 12L20 12" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
         <path d="M4 6L20 6" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
         </svg>
 </button>
+
+{{-- <button id="toggleSideBarMobile" class="flex md:hidden flex-col justify-center items-center gap-[0.5px] h-full ">
+    <svg width="24px" height="auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 18L20 18" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+        <path d="M4 12L20 12" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+        <path d="M4 6L20 6" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+</button> --}}
             <div class=" flex items-center  w-2/4 h-12 rounded-full border-2 bg-[#F5F6FA] overflow-hidden text-[#D5D5D5]">
                 <div class="grid place-items-center h-full w-12 text-gray-300">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
