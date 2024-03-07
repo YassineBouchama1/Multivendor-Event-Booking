@@ -24,4 +24,9 @@ class Reservation extends Model
     {
         return $this->belongsTo(Event::class);
     }
+
+    // public function organizer()
+    // {
+    //     return $this->belongsTo(User::class, 'event_id', 'organizer_id');
+    // }
 }

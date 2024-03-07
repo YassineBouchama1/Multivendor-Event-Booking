@@ -19,7 +19,7 @@
                                 </th>
 
                                 <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
-                                    city
+                                    location
                                 </th>
 
                                 <th scope="col" class="p-4 text-left text-xs font-medium text-gray-500 uppercase">
@@ -44,13 +44,13 @@
 
                                 </td>
                                 <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{$reservation->event['title']}}</td>
-                                <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{$reservation->event['city']}}</td>
+                                <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{$reservation->event['location']}}</td>
                                 <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{$reservation->event['category']->name}}</td>
                                 <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{$reservation['status']}}</td>
 
                                 <td class="p-4 whitespace-nowrap space-x-2 flex  flex-row">
 
-                                    @if($reservation['status' ]==='unconfirmed')
+@if($reservation['status' ]==='unconfirmed')
 <form class="" method="POST" action="{{route('reservations.confirmed',['reservation'=>$reservation['id']])}}">
     @csrf
     @method("PATCH")
@@ -61,15 +61,16 @@
 @endif
 
 
-@if($reservation['status' ] ==='canceled' || $reservation['status' ] !='used')
+@if($reservation['status'] === 'canceled'  $reservation['status'] != 'used')
 <form method="POST" action="{{route('reservations.canceled',['reservation'=>$reservation['id']])}}">
     @csrf
     @method("PATCH")
-    <button  type="submit" data-modal-toggle="delete-user-modal" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center">
-        cancele
+    <button type="submit" data-modal-toggle="delete-user-modal" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-3 py-2 text-center">
+        Cancel
     </button>
 </form>
 @endif
+
 
 
                                 </td>

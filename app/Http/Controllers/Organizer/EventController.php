@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Organizer;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\ChangeEventStatus;
 use App\Models\Category;
 use App\Models\Event;
 use App\Models\User;
@@ -69,6 +70,10 @@ class EventController extends Controller
         // Create a new event
         $event = Event::create($validatedData);
 
+        //if event created true create job cron
+        if ($event->id) {
+            ChangeEventStatus::dispatch($event->id);
+        }
         return redirect()->route('events.index')->with('success', 'Event created successfully');
     }
 
@@ -119,6 +124,11 @@ class EventController extends Controller
         // Save the updated event
         $event->save();
 
+
+        //if event created true create job cron
+        //   if ($event->id) {
+        //     ChangeEventStatus::dispatch($event->id);
+        // }
         // Redirect with success message
         return redirect()->route('events.index')->with('success', 'Event updated successfully.');
     }

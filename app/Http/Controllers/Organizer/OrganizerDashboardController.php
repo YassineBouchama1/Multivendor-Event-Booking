@@ -14,15 +14,15 @@ class OrganizerDashboardController extends Controller
     public function index()
     {
         $events = Event::get();
-        $reservations =  Auth::user()->reservations;
-
+        $reservations =  Auth::user()->reservationsOrganizer;
+        // dd($reservations);
 
         //bring all counts of events and reservations
         $eventWaiting = Auth::user()->events->where('status', '=', 'waiting')->count();
         $activeEvents = Auth::user()->events->where('status', '=', 'approved')->count();
-        $reservationsCount = Auth::user()->reservations->count();
+        // $reservationsCount = Auth::user()->reservations->count();
 
         // dd('dahsboar');
-        return view('organizer.index', compact('events', 'eventWaiting', 'activeEvents', 'reservations', 'reservationsCount'));
+        return view('organizer.index', compact('events', 'eventWaiting', 'activeEvents', 'reservations',));
     }
 }

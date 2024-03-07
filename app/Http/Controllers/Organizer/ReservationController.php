@@ -26,7 +26,7 @@ class ReservationController extends Controller
     {
         $reservationCount = Reservation::count();
         //check if there is a place
-        if ($event->places >= $reservationCount) {
+        if ($reservationCount >= $event->places) {
             $event->status = 'fulled';
             $event->save();
             return redirect()->route('home.index')->with('error', 'event is fulled');
@@ -44,7 +44,7 @@ class ReservationController extends Controller
         ]);
         $reservationCountUpdated = Reservation::count();
 
-        if ($event->places >= $reservationCountUpdated) {
+        if ($reservationCountUpdated >= $event->places) {
             $event->status = 'fulled';
             $event->save();
         }

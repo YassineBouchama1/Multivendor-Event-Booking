@@ -57,4 +57,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Reservation::class, 'user_id');
     }
+
+    //this is for chatch data threought two tables
+    public function reservationsOrganizer()
+    {
+        return $this->hasManyThrough(Reservation::class, Event::class, 'organizer_id', 'event_id');
+    }
 }
