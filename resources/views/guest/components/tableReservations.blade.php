@@ -52,7 +52,7 @@
                             <td class="p-4 whitespace-nowrap space-x-2 flex  flex-row">
 
                                 @if($reservation['status' ] !='unconfirmed')
-<a href="{{route('ticketPdf',['reservation'=>$reservation->id])}}"
+<a href="{{route('downloadTicket',['reservation'=>$reservation->id])}}"
     target="_blank"
     >Download Ticket</a>
 

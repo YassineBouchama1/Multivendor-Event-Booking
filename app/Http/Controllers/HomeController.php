@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\EventsResource;
 use App\Models\Category;
 use App\Models\Event;
 use Carbon\Carbon;
@@ -28,7 +29,7 @@ class HomeController extends Controller
             $query->where('title', 'like', "%$search%");
         }
 
-      
+
         $query->where('status', '!=', 'ended')
             ->where('status', '!=', 'canceled')
             ->where('status', '!=', 'waiting');
@@ -37,7 +38,9 @@ class HomeController extends Controller
         // fetch all categories
         $categories = Category::all();
 
-        return view('guest.home', compact('events', 'categories'));
+        $eventsFil =    EventsResource::collection($events);
+
+        return view('guest.home', compact('eventsFil', 'categories'));
     }
 
 

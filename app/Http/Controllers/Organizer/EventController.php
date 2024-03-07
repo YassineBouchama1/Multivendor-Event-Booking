@@ -24,6 +24,7 @@ class EventController extends Controller
         $reservations = Auth::user()->reservations->count();
 
 
+
         return view('organizer.events.index', compact('events', 'eventWaiting', 'activeEvents', 'reservations'));
     }
 

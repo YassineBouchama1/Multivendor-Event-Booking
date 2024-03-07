@@ -50,7 +50,7 @@
 
                                 <td class="p-4 whitespace-nowrap space-x-2 flex  flex-row">
 
-@if($reservation['status' ]==='unconfirmed')
+@if($reservation['status' ] === 'unconfirmed')
 <form class="" method="POST" action="{{route('reservations.confirmed',['reservation'=>$reservation['id']])}}">
     @csrf
     @method("PATCH")
@@ -59,9 +59,7 @@
     </button>
 </form>
 @endif
-
-
-@if($reservation['status'] === 'canceled'  $reservation['status'] != 'used')
+@if($reservation['status' ] != 'canceled' && $reservation['status' ] != 'used')
 <form method="POST" action="{{route('reservations.canceled',['reservation'=>$reservation['id']])}}">
     @csrf
     @method("PATCH")
@@ -70,6 +68,8 @@
     </button>
 </form>
 @endif
+
+
 
 
 

@@ -34,7 +34,7 @@ class ReservationController extends Controller
 
 
         // determine whether the status is confirmed or unconfirmed based on the event is reservation method
-        $status = $event->reservation_method === 'manual' ? 'confirmed' : 'unconfirmed';
+        $status = $event->reservation_method === 'manual' ? 'unconfirmed' : 'confirmed';
 
         // Ccreate a new reservation
         $reservationCreated = Reservation::create([

@@ -58,11 +58,15 @@ Route::middleware(['auth', 'verified', 'checkrole:user'])->prefix('/user')->grou
     Route::get('/', [UserController::class, 'index'])->name('user.index');
     Route::post('/eventDetails/{event}', [ReservationController::class, 'store'])->name('user.booking');
 
-    Route::get('view-pdf/{reservation}', [PDFController::class, 'viewPDF'])->name('ticketPdf');
-    Route::get('generate-pdf/{reservation}', [PDFController::class, 'generatePDF'])->name('downloadTicket');
+
+    //thi is when scan qrcode display details of tickets
+
+    //thi is for generate pdf
+    Route::get('ticket-pdf/{reservation}', [UserController::class, 'generatePdf'])->name('downloadTicket');
 });
 
 
+Route::get('ticketPreview/{reservation}', [UserController::class, 'ticketPreview'])->name('ticketPreview');
 
 
 // Routes for guests

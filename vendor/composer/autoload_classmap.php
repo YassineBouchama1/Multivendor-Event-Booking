@@ -41,6 +41,8 @@ return array(
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
     'App\\Http\\Requests\\Auth\\LoginRequest' => $baseDir . '/app/Http/Requests/Auth/LoginRequest.php',
     'App\\Http\\Requests\\ProfileUpdateRequest' => $baseDir . '/app/Http/Requests/ProfileUpdateRequest.php',
+    'App\\Http\\Resources\\EventsResource' => $baseDir . '/app/Http/Resources/EventsResource.php',
+    'App\\Jobs\\ChangeEventStatus' => $baseDir . '/app/Jobs/ChangeEventStatus.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\Event' => $baseDir . '/app/Models/Event.php',
     'App\\Models\\Reservation' => $baseDir . '/app/Models/Reservation.php',
