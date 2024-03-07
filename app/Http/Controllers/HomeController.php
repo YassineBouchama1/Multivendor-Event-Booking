@@ -29,16 +29,24 @@ class HomeController extends Controller
             $query->where('title', 'like', "%$search%");
         }
 
+        // filter out events with suspended owners
+        $query->whereHas('user', function ($query) {
+            $query->where('status', '!=', 'suspended');
+        });
 
-        $query->where('status', '!=', 'ended')
-            ->where('status', '!=', 'canceled')
-            ->where('status', '!=', 'waiting');
+        // Exclude certain statuses
+        $query->whereNotIn('status', ['ended', 'canceled', 'waiting']);
+
         $events = $query->paginate(1);
+
 
         // fetch all categories
         $categories = Category::all();
 
-        $eventsFil =    EventsResource::collection($events);
+
+        // change formte data
+        $eventsFil = EventsResource::collection($events);
+
 
         return view('guest.home', compact('eventsFil', 'categories'));
     }

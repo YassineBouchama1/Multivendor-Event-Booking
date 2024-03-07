@@ -29,10 +29,12 @@ class Event extends Model
     ];
 
 
+    //this is organizer
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'organizer_id');
     }
+
     public function category()
     {
         return $this->belongsTo(Category::class);

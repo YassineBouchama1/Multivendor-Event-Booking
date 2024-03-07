@@ -87,8 +87,8 @@ Events
                                     <div class="flex items-center">
 
                                         <select  name="status" class="outline-none border-none">
-                                            <option value="active" selected={{$user['status'] == 'active'}}>active</option>
-                                            <option value="suspended"  selected={{$user['status'] == 'suspended'}}>suspended</option>
+                                            <option value="active" {{$user['status'] == 'active'?'selected':''}}>active</option>
+                                            <option value="suspended"  {{$user['status'] == 'suspended'?'selected':''}}>suspended</option>
                                         </select>
 </div>
                                 </td>

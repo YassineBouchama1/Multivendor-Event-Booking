@@ -143,10 +143,6 @@ class="w-full rounded-sm border-gray-200 p-3 text-sm"
 </label>
 
 
-<label for="password_confirmation"
-class="flex flex-col lg:flex-row gap-y-1 mt-8 ">
-
-
 
 
 

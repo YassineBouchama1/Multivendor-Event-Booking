@@ -29,10 +29,19 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if (Auth::user()->status === 'suspended') {
+            Auth::guard('web')->logout();
+
+            $request->session()->invalidate();
+
+            $request->session()->regenerateToken();
+            return redirect()->route('login')->with('error', 'you are suspanded');
+        }
+
         if (Auth::user()->hasRole('user')) {
             return redirect()->intended(RouteServiceProvider::PROFILE);
         } elseif (Auth::user()->hasRole('admin')) {
-            redirect()->intended(RouteServiceProvider::ADMIN);
+            return redirect()->intended(RouteServiceProvider::ADMIN);
         }
         return redirect()->intended(RouteServiceProvider::ORGANIZER);
     }

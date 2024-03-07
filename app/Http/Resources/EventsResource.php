@@ -40,7 +40,6 @@ class EventsResource extends JsonResource
             'status' => $this->status,
             'seats' => $countSeats,
             'timeEvent' => $startDate->diffInDays($endDate),
-
             'dateDay' => $startDate->format('d') . ' ' . $startDate->format('F'),
             'hourEvent' => $startDate->format('H:i'),
             'created_at' => $this->created_at,

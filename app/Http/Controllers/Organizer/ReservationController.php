@@ -22,8 +22,56 @@ class ReservationController extends Controller
     }
 
 
-    public function store(Request $request, Event $event)
+
+    public function session(Request $request, Event $event)
     {
+
+        \Stripe\Stripe::setApiKey(config('stripe.sk'));
+
+
+        //create session to save event
+        $request->session()->put('event', $event);
+
+
+
+        //cheeck if event is free create resrvation direct without strip
+        if ((int)$event->price === 0) {
+            return redirect()->route('user.booking');
+        }
+
+
+        $session = \Stripe\Checkout\Session::create([
+            'line_items'  => [
+                [
+                    'price_data' => [
+                        'currency'     => 'USD',
+                        'product_data' => [
+                            "name" => $event->title,
+                        ],
+                        'unit_amount'  => (int)$event->price,
+                    ],
+                    'quantity'   => 1,
+                ],
+
+            ],
+            'mode'        => 'payment',
+            'success_url' => route('user.booking'),
+            'cancel_url'  => route('checkout'),
+        ]);
+
+        return redirect()->away($session->url);
+    }
+
+
+
+    public function store(Request $request)
+    {
+
+        //get event details from session come from sessin function
+        $event = session('event');
+
+
+        // dd($event);
         $reservationCount = Reservation::count();
         //check if there is a place
         if ($reservationCount >= $event->places) {
@@ -49,43 +97,15 @@ class ReservationController extends Controller
             $event->save();
         }
 
+        //after create reservation remove session
+        $request->session()->forget('event');
+
         return redirect()->route('user.index')->with('success', 'Booked Event Successfully');
     }
 
 
 
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Reservation $reservation)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Reservation $reservation)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Reservation $reservation)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Reservation $reservation)
-    {
-        //
-    }
 
     public function confirmed(Reservation $reservation)
     {

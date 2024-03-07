@@ -56,7 +56,15 @@ Route::middleware(['auth', 'verified', 'checkrole:organizer'])->prefix('/organiz
 //routes for users
 Route::middleware(['auth', 'verified', 'checkrole:user'])->prefix('/user')->group(function () {
     Route::get('/', [UserController::class, 'index'])->name('user.index');
-    Route::post('/eventDetails/{event}', [ReservationController::class, 'store'])->name('user.booking');
+    Route::get('/eventDetails', [ReservationController::class, 'store'])->name('user.booking');
+
+    Route::post('/session/{event}', [ReservationController::class, 'session'])->name('user.session');
+    Route::get('/checkout', function () {
+        $reservationData = session('reservation_data');
+        dd($reservationData);
+        return 'n';
+    })->name('checkout');
+
 
 
     //thi is when scan qrcode display details of tickets

@@ -29,6 +29,7 @@
         <div class="px-4 lg:px-0 mt-12 text-gray-700 text-lg leading-relaxed w-full lg:w-3/4">
             <p class="pb-6">{{$event->description}}</p>
 
+            <div id="map" class="min-w-full h-[300px]"></div>
 
         </div>
 
@@ -78,7 +79,7 @@
 <hr class="py-2">
 
             @hasrole('user')
-            <form id="bookingBtn" method="POST" action="{{route('user.booking',['event'=>$event->id])}}">
+            <form id="bookingBtn" method="POST" action="{{route('user.session',['event'=>$event->id])}}">
                 @csrf
             <button class="px-2 py-1 text-gray-100 bg-green-700 flex w-full items-center justify-center rounded">
                 Book Now
@@ -107,7 +108,6 @@
     <!-- footer -->
     <footer class="border-t mt-12 pt-12 pb-32 px-4 lg:px-0">
       <div>
-        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80" class="h-12 w-12" alt="logo">
       </div>
       <div class="flex flex-wrap">
         <div class="w-full lg:w-2/5">
@@ -150,6 +150,43 @@
       </div>
     </footer>
   </div>
+  <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCQSpOMueYe44kR599w57wN6Gye1kKKK24&callback=initMap&v=weekly"
+      defer
+    ></script>
+
+    <script type="text/javascript">
+
+        function initMap() {
+          const myLatLng = { lat: 32.293178173461165, lng: -9.235036964307337 };
+          const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 19,
+            center: myLatLng,
+          });
+
+          new google.maps.Marker({
+            position: myLatLng,
+            map,
+            title: "Hello Rajkot!",
+          });
+        }
+
+        window.initMap = initMap;
+
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  infoWindow.setPosition(pos);
+  infoWindow.setContent(
+    browserHasGeolocation
+      ? "Error: The Geolocation service failed."
+      : "Error: Your browser doesn't support geolocation.",
+  );
+  infoWindow.open(map);
+}
+
+window.initMap = initMap;
+</script>
+
 
   <script>
     let targetDate = "{{ $event->start_date }}";
