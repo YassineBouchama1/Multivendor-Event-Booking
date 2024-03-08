@@ -15,7 +15,7 @@ class EventController extends Controller
     public function index()
     {
 
-        $events = Event::get();
+        $events = Auth::user()->events;
 
 
         //bring all counts of events and reservations

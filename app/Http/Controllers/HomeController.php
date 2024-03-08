@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ReservationsRealTime;
 use App\Http\Resources\EventsResource;
 use App\Models\Category;
 use App\Models\Event;
@@ -17,6 +18,8 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
+
+        event(new ReservationsRealTime);
         $query = Event::query();
 
         // $query = Cache::remember('events', 60, function () {

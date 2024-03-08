@@ -75,14 +75,14 @@
                                     </div>
                                 </td>
                                 <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{$event['price']}}</td>
-                                <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{$event['places']}}</td>
+                                <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{$event['places']}}/{{count($event->reservations)}}</td>
                                 <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{$event['city']}}</td>
                                 <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{$event['category']->name}}</td>
                                 <td class="p-4 whitespace-nowrap text-base font-medium text-gray-900">{{$event['status']}}</td>
 
                                 <td class="p-4 whitespace-nowrap space-x-2">
 
-@if($event['status' ]!='approved')
+@if($event['status' ]=='waiting')
 <form method="POST" action="{{route('events.accept',['event'=>$event['id']])}}">
     @csrf
     @method("patch")

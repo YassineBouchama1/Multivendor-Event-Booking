@@ -89,9 +89,19 @@
 
 
 
+@vite('resources/js/app.js');
 
+        <script>
 
+            setTimeout(() => {
+                console.log('hoa sockets')
+                window.Echo.channel('channel-reservation')
+        .listen('.App\\Events\\ReservationsRealTime',(e)=>{
+            console.log(e)
+        })
 
+            }, 200);
+        </script>
 
 
 @endsection
