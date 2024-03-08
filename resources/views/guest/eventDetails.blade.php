@@ -64,7 +64,7 @@
               </div>
             </div>
             <hr class="py-2">
-            <div class="text-2xl font-bold flex justify-between pb-4">
+            <div class="text-xl font-bold flex justify-between gap-x-3 pb-4">
                 <p>Total Price :</p>
                 @if($event->price == 0)
                     <p class="text-mainColorhome">Free</p>
@@ -79,6 +79,9 @@
 <hr class="py-2">
 
             @hasrole('user')
+            @if ($event['status'] === 'fulled')
+            <div class="btn soldout text-red-500">Sold Out</div>
+        @else
             <form id="bookingBtn" method="POST" action="{{route('user.session',['event'=>$event->id])}}">
                 @csrf
             <button class="px-2 py-1 text-gray-100 bg-green-700 flex w-full items-center justify-center rounded">
@@ -86,9 +89,15 @@
               <i class='bx bx-user-plus ml-2' ></i>
             </button>
         </form>
+@endif
+
+
 
             @endhasrole
             @guest
+            @if ($event['status'] === 'fulled') <!-- Assuming isFull() is a method that checks if the event is full -->
+            <div class="btn soldout  text-red-500">Sold Out</div>
+        @else
             <form id="bookingBtn" method="POST" action="{{route('user.booking',['event'=>$event->id])}}">
                 @csrf
                 <button type="submit" class="px-2 py-1 text-gray-100 bg-green-700 flex w-full items-center justify-center rounded">
@@ -96,6 +105,8 @@
                     <i class='bx bx-user-plus ml-2' ></i>
                 </button>
             </form>
+@endif
+
             @endguest()
 
 

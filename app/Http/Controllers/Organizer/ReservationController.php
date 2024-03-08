@@ -74,7 +74,7 @@ class ReservationController extends Controller
 
 
         // dd($event);
-        $reservationCount = Reservation::count();
+        $reservationCount = count($event->reservations);
         //check if there is a place
         if ($reservationCount >= $event->places) {
             $event->status = 'fulled';
@@ -101,9 +101,9 @@ class ReservationController extends Controller
 
 
         // check if event full
-        $reservationCountUpdated = Reservation::count();
+        $reservationCountUpdated = count(Event::where('id', $event->id)->first()->reservations);
 
-
+        // deteremin is event fulled after last reservation
         if ($reservationCountUpdated >= $event->places) {
             $event->status = 'fulled';
             $event->save();
@@ -141,7 +141,17 @@ class ReservationController extends Controller
         $reservation->status = 'canceled';
 
         $reservation->save();
+        $reservation->delete();
 
+
+        $event = Event::where('id', $reservation->event_id)->first();
+        $ReservationCount = Reservation::where('event_id', $event->id)->count();
+
+        // check if there is a tickets for event
+        if ($event->places > $ReservationCount) {
+            $event->status = 'approved';
+            $event->save();
+        }
         return redirect()->route('reservations.index')->with('success', 'reservation canceled successfully.');;
     }
 }

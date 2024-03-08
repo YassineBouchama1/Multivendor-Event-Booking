@@ -37,7 +37,7 @@ class HomeController extends Controller
         // Exclude certain statuses
         $query->whereNotIn('status', ['ended', 'canceled', 'waiting']);
 
-        $events = $query->paginate(1);
+        $events = $query->paginate(5);
 
 
         // fetch all categories
@@ -55,7 +55,9 @@ class HomeController extends Controller
     public function eventDetails(Event $event)
     {
 
-        if ($event->status === 'approved') {
+
+        // if event expired or full display it
+        if ($event->status === 'approved' || $event->status === 'fulled') {
 
             $carbonDate = Carbon::parse($event->start_date);
             // Get the month name
