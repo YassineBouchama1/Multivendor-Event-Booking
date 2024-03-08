@@ -17,11 +17,11 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        // $query = Event::query();
-        $query = Cache::remember('events', 60, function () {
-            return Event::query();
-        });
+        $query = Event::query();
 
+        // $query = Cache::remember('events', 60, function () {
+        //     return Event::query();
+        // });
         // iff passing a category_id, filter data by it
         if ($request->filled('category_id') && $request->input('category_id') !== 'null') {
             $query->where('category_id', '=', $request->input('category_id'));
