@@ -23,7 +23,10 @@
 .section::-webkit-scrollbar-track {
   /* background-color: black; */
 }
-
+.active {
+    background-color: blue;
+    color: white;
+}
     </style>
     <body class=" flex  flex-row w-full  bg-[#F5F6FA]  text-base font-normal leading-5 font-sans">
 

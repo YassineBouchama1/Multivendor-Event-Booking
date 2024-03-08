@@ -5,7 +5,7 @@
 
 
 
-    <div class="  w-full  flex  gap-x-4 items-center">
+    <div class="  w-full  md:flex  gap-x-4 items-center">
 <button id="toggleSideBar" class="flex flex-col justify-center items-center gap-[0.5px] h-full ">
     <svg width="24px" height="auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M4 18L20 18" stroke="#000000" stroke-width="2" stroke-linecap="round"/>
