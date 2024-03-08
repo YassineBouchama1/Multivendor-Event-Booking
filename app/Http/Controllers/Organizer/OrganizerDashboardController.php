@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class OrganizerDashboardController extends Controller
 
@@ -14,8 +15,12 @@ class OrganizerDashboardController extends Controller
     public function index()
     {
         $events = Event::get();
-        $reservations =  Auth::user()->reservationsOrganizer;
+        $reservations =  Auth::user()->reservationsOrganizer()->paginate(6);
         // dd($reservations);
+
+        // $reservations = Cache::remember('reservationsDashboard',function(){
+
+        // })
 
         //bring all counts of events and reservations
         $eventWaiting = Auth::user()->events->where('status', '=', 'waiting')->count();

@@ -29,7 +29,10 @@
 }
     </style>
     <body class=" flex  flex-row w-full  bg-[#F5F6FA]  text-base font-normal leading-5 font-sans">
-
+        {{-- Loading  --}}
+        <div id="loading-spinner" class="  fixed  w-full bg-green-400/15 h-screen z-[999] flex justify-center items-center" >
+            <div class="loading-spinner  top-0 left-0 right-0 b-0 "></div>
+            </div>
             @include('admin/layouts.sideBar')
              <!--  inside page  -->
   <div  class=" flex-grow min-h-screen  relative px-4 ">
@@ -85,5 +88,24 @@
 
     });
 </script>
+
+<script>
+    // Show spinner on page load
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById('loading-spinner').classList.add('flex');
+    });
+
+    // Hide spinner when page has finished loading
+    window.onload = function() {
+        document.getElementById('loading-spinner').classList.add('hidden');
+    };
+
+    // Show spinner when navigating to a new page
+    document.addEventListener("click", function(event) {
+        if (event.target.tagName === 'A') {
+            document.getElementById('loading-spinner').classList.remove('hidden');
+        }
+    });
+    </script>
     </body>
 </html>
