@@ -10,6 +10,8 @@ use App\Http\Controllers\Organizer\ReservationController;
 use App\Http\Controllers\PDFController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\UserController;
+use App\Mail\ReservationMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,11 +49,15 @@ Route::middleware(['auth', 'verified', 'checkrole:organizer'])->prefix('/organiz
 
     Route::resource('/events', EventController::class)->except(['show']);
     Route::resource('/reservations', ReservationController::class)->except(['show']);
-    Route::patch('/reservations/{reservation}', [ReservationController::class, 'confirmed'])->name('reservations.confirmed');
+    Route::patch('/reservationscon/{reservation}', [ReservationController::class, 'confirmed'])->name('reservations.confirmed');
     Route::patch('/reservations/{reservation}', [ReservationController::class, 'canceled'])->name('reservations.canceled');
 });
 
 
+Route::get('/email', function () {
+    Mail::to('sisko4dev@gmail.com')->send(new ReservationMail('hols'));
+    return 'send';
+});
 
 //routes for users
 Route::middleware(['auth', 'verified', 'checkrole:user'])->prefix('/user')->group(function () {
