@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Event;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -16,7 +17,10 @@ class HomeController extends Controller
 
     public function index(Request $request)
     {
-        $query = Event::query();
+        // $query = Event::query();
+        $query = Cache::remember('events', 60, function () {
+            return Event::query();
+        });
 
         // iff passing a category_id, filter data by it
         if ($request->filled('category_id') && $request->input('category_id') !== 'null') {
@@ -44,8 +48,10 @@ class HomeController extends Controller
         $categories = Category::all();
 
 
+
         // change formte data
         $eventsFil = EventsResource::collection($events);
+        // dd($eventsFil);
 
 
         return view('guest.home', compact('eventsFil', 'categories'));

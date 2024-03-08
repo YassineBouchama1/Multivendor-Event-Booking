@@ -28,7 +28,7 @@ class=" pb-10 w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justi
         <div class="px-4 py-3 w-72 relative">
             <div class="absolute flex items-center justify-between px-2 pb-3 pt-1 bg-white top-[-15%] rounded-md left-2 right-2 ">
 
-              <div class="gap-x-1 flex text-sm items-center"><i class="fa-solid fa-calendar-days text-mainColorhome"></i>27 Jan</div>
+              <div class="gap-x-1 flex text-sm items-center"><i class="fa-solid fa-calendar-days text-mainColorhome"></i>25 jan</div>
               <div class="gap-x-1 flex text-sm items-center"><i class="fa-solid fa-calendar-days text-mainColorhome"></i>27 Jan</div>
               <div class="gap-x-1 flex text-sm items-center"><i class="fa-solid fa-calendar-days text-mainColorhome"></i>27 Jan</div>
 

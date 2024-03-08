@@ -24,20 +24,17 @@ class ChangeEventStatus implements ShouldQueue
     {
         $this->eventId = $eventId;
     }
-    /**
-     * Execute the job.
-     */
-
+    // sail artisan queue:work --once
     public function handle(): void
     {
         $event = Event::find($this->eventId);
 
-        // Check if event exists and is still active
+        //1- Check if event exists and is still active
         if ($event && $event->status != 'canceled') {
-            // Convert start_date to a Carbon instance
+            //2- Convert start_date to a Carbon instance
             $endDate = Carbon::parse($event->end_date);
 
-            // Check if the event is older
+            //3- Check if the event is older
             if ($endDate->isPast()) {
                 // Cancel the event
                 $event->update(['status' => 'ended']);
