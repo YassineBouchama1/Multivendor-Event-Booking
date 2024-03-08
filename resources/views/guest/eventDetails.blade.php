@@ -79,22 +79,27 @@
 <hr class="py-2">
 
             @hasrole('user')
-            @if ($event['status'] === 'fulled')
-            <div class="btn soldout text-red-500">Sold Out</div>
-        @else
-            <form id="bookingBtn" method="POST" action="{{route('user.session',['event'=>$event->id])}}">
-                @csrf
-            <button class="px-2 py-1 text-gray-100 bg-green-700 flex w-full items-center justify-center rounded">
-                Book Now
-              <i class='bx bx-user-plus ml-2' ></i>
-            </button>
-        </form>
+            @if(Auth::user()->reservations->contains('event_id', $event['id']))
+            You have already made a reservation for this event.
+@else
+@if ($event['status'] === 'fulled')
+<div class="btn soldout text-red-500">Sold Out</div>
+@else
+<form id="bookingBtn" method="POST" action="{{route('user.session',['event'=>$event->id])}}">
+    @csrf
+<button class="px-2 py-1 text-gray-100 bg-green-700 flex w-full items-center justify-center rounded">
+    Book Now
+  <i class='bx bx-user-plus ml-2' ></i>
+</button>
+</form>
 @endif
 
 
 
+@endif
             @endhasrole
             @guest
+
             @if ($event['status'] === 'fulled') <!-- Assuming isFull() is a method that checks if the event is full -->
             <div class="btn soldout  text-red-500">Sold Out</div>
         @else
