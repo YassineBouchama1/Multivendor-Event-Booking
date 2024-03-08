@@ -23,8 +23,8 @@
 @endif
 <div class="bg-gray-100">
     <div class="container mx-auto py-8">
-        <div class="grid grid-cols-4 sm:grid-cols-12 gap-6 px-4">
-            <div class="col-span-4 sm:col-span-3">
+        <div class="grid grid-cols-4 md:grid-cols-12 gap-6 px-4">
+            <div class="col-span-4 md:col-span-3">
                 <div class="bg-white shadow rounded-lg p-6">
                     <div class="flex flex-col items-center">
                         <img src="{{asset('avatars') .'/'.$user->image}}" class="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-span-4 sm:col-span-9">
+            <div class="col-span-4 md:col-span-9">
                 <div class="bg-white shadow rounded-lg p-6">
                     <h2 class="text-2xl font-bold mb-4 text-mainColorhome">Reservations</h2>
                     <hr class="my-6 border-t border-gray-300">

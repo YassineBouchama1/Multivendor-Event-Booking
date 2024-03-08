@@ -19,7 +19,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
 
-        event(new ReservationsRealTime);
+
         $query = Event::query();
 
         // $query = Cache::remember('events', 60, function () {

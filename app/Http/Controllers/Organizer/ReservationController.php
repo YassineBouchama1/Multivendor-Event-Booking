@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Organizer;
 
+use App\Events\ReservationsRealTime;
 use App\Http\Controllers\Controller;
 use App\Mail\ReservationMail;
 use App\Models\Event;
@@ -111,7 +112,7 @@ class ReservationController extends Controller
 
         //after create reservation remove session
         $request->session()->forget('event');
-
+        event(new ReservationsRealTime(Auth::user()->name, Auth::user()->image, $event->title));
         return redirect()->route('user.index')->with('success', 'Booked Event Successfully');
     }
 

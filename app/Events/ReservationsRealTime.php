@@ -17,12 +17,16 @@ class ReservationsRealTime implements ShouldBroadcast
     /**
      * Create a new event instance.
      */
-    public $data;
-    public function __construct()
-    {
-        $this->data = 'hello socket reserve';
-    }
+    public $name;
+    public $message;
+    public $avatar;
 
+    public function __construct($name, $avatar, $event)
+    {
+        $this->name = $name;
+        $this->message = "Bought a Ticket for $event Event";
+        $this->avatar = $avatar;
+    }
     /**
      * Get the channels the event should broadcast on.
      *

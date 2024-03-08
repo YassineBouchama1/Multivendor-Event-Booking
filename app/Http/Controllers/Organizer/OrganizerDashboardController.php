@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Organizer;
 
+use App\Events\ReservationsRealTime;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
 use Illuminate\Http\Request;
@@ -14,6 +15,7 @@ class OrganizerDashboardController extends Controller
 
     public function index()
     {
+
         $events = Event::get();
         $reservations =  Auth::user()->reservationsOrganizer()->paginate(6);
         // dd($reservations);
